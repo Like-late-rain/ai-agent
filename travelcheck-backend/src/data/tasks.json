@@ -1,0 +1,68 @@
+[
+  {
+    "id": "task-001",
+    "name": "Great Wall of China",
+    "description": "Visit the iconic Great Wall of China and complete a 30-day check-in challenge!",
+    "location": {
+      "name": "Badaling Great Wall",
+      "address": "Yanqing District, Beijing, China",
+      "lat": 40.3593,
+      "lng": 116.0153,
+      "radius": 5000
+    },
+    "coverImage": "/images/attractions/greatwall-cover.jpg",
+    "overviewImage": "/images/attractions/greatwall-overview.jpg",
+    "duration": 30,
+    "difficulty": "medium",
+    "rewardApy": 15,
+    "minStake": 10,
+    "startDate": "2026-01-01T00:00:00.000Z",
+    "endDate": "2026-06-30T23:59:59.999Z",
+    "status": "active",
+    "createdAt": "2025-12-15T00:00:00.000Z"
+  },
+  {
+    "id": "task-002",
+    "name": "Eiffel Tower Challenge",
+    "description": "Experience Paris with a 100-day check-in journey at the Eiffel Tower!",
+    "location": {
+      "name": "Eiffel Tower",
+      "address": "Champ de Mars, 5 Avenue Anatole France, Paris, France",
+      "lat": 48.8584,
+      "lng": 2.2945,
+      "radius": 3000
+    },
+    "coverImage": "/images/attractions/eiffel-cover.jpg",
+    "overviewImage": "/images/attractions/eiffel-overview.jpg",
+    "duration": 100,
+    "difficulty": "hard",
+    "rewardApy": 20,
+    "minStake": 50,
+    "startDate": "2026-01-01T00:00:00.000Z",
+    "endDate": "2026-12-31T23:59:59.999Z",
+    "status": "active",
+    "createdAt": "2025-12-15T00:00:00.000Z"
+  },
+  {
+    "id": "task-003",
+    "name": "Local Park Explorer",
+    "description": "Explore your local park with a simple 30-day check-in challenge!",
+    "location": {
+      "name": "Central Park",
+      "address": "New York, NY, USA",
+      "lat": 40.7829,
+      "lng": -73.9654,
+      "radius": 10000
+    },
+    "coverImage": "/images/attractions/centralpark-cover.jpg",
+    "overviewImage": "/images/attractions/centralpark-overview.jpg",
+    "duration": 30,
+    "difficulty": "easy",
+    "rewardApy": 10,
+    "minStake": 5,
+    "startDate": "2026-01-01T00:00:00.000Z",
+    "endDate": "2026-03-31T23:59:59.999Z",
+    "status": "active",
+    "createdAt": "2025-12-15T00:00:00.000Z"
+  }
+]

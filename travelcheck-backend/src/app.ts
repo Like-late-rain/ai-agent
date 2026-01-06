@@ -1,8 +1,10 @@
 /**
- * @file Koa应用配置
- * @description 配置Koa应用、中间件和路由
+ * @file Koa Application Configuration
+ * @description Configure Koa app, middlewares, and routes
  */
 
+import { errorMiddleware } from '@/middlewares/error.middleware'
+import routes from '@/routes'
 import Koa from 'koa'
 import bodyparser from 'koa-bodyparser'
 import cors from 'koa-cors'
@@ -14,35 +16,14 @@ const app = new Koa()
 const router = new Router()
 
 /**
- * 错误处理中间件
- * @description 捕获所有错误并返回统一格式
+ * Error handling middleware
+ * Must be first to catch all errors
  */
-app.use(async (ctx, next) => {
-  try {
-    await next()
-  } catch (err: unknown) {
-    const error = err as Error & { status?: number; expose?: boolean }
-
-    // 记录错误日志
-    console.error('Error:', error.message)
-    console.error('Stack:', error.stack)
-
-    // 设置状态码
-    ctx.status = error.status || 500
-
-    // 返回统一格式的错误响应
-    ctx.body = {
-      code: ctx.status,
-      message: error.expose ? error.message : 'Internal Server Error',
-      data: null,
-      timestamp: new Date().toISOString(),
-    }
-  }
-})
+app.use(errorMiddleware)
 
 /**
- * CORS配置
- * @description 允许前端跨域访问
+ * CORS configuration
+ * Allow frontend cross-origin access
  */
 app.use(
   cors({
@@ -52,25 +33,25 @@ app.use(
 )
 
 /**
- * 安全头配置
+ * Security headers configuration
  */
 app.use(helmet())
 
 /**
- * 请求日志中间件
- * @description 记录所有HTTP请求
+ * Request logging middleware
+ * Log all HTTP requests
  */
 app.use(logger())
 
 /**
- * Body解析中间件
+ * Body parser middleware
  */
 app.use(bodyparser())
 
 /**
- * 健康检查接口
+ * Health check endpoint
  * @route GET /health
- * @description 用于检查服务是否正常运行
+ * @description Check if service is running
  */
 router.get('/health', async (ctx) => {
   ctx.body = {
@@ -82,18 +63,21 @@ router.get('/health', async (ctx) => {
 })
 
 /**
- * 根路由
+ * Root endpoint
  */
 router.get('/', async (ctx) => {
   ctx.body = {
     name: 'TravelCheck API',
     version: '1.0.0',
-    description: '区块链旅行打卡DApp后端API',
+    description: 'Blockchain Travel Check-in DApp Backend API',
     timestamp: new Date().toISOString(),
   }
 })
 
-// 注册路由
+// Register health check routes
 app.use(router.routes()).use(router.allowedMethods())
+
+// Register API routes
+app.use(routes.routes()).use(routes.allowedMethods())
 
 export default app
