@@ -49,17 +49,13 @@ export function HomePage() {
         <Card className="max-w-md text-center">
           <Card.Body>
             <div className="text-6xl mb-4">✈️</div>
-            <h1 className="text-3xl font-bold text-primary mb-4">
-              Welcome to TravelCheck
-            </h1>
+            <h1 className="text-3xl font-bold text-primary mb-4">Welcome to TravelCheck</h1>
             <p className="text-text-muted mb-6">
               Explore the world and earn rewards with blockchain technology. Check in at amazing
               locations, complete challenges, and build your travel portfolio.
             </p>
             <div className="bg-background-dark rounded-lg p-4 mb-6">
-              <p className="text-sm text-text-muted">
-                Please connect your wallet to get started
-              </p>
+              <p className="text-sm text-text-muted">Please connect your wallet to get started</p>
             </div>
           </Card.Body>
         </Card>

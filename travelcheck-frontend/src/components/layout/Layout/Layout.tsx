@@ -68,9 +68,7 @@ export function Layout({ children }: LayoutProps) {
                   className={clsx(
                     'flex items-center gap-2 px-4 py-3 font-medium transition-colors',
                     'hover:text-primary',
-                    isActive
-                      ? 'border-b-2 border-primary text-primary'
-                      : 'text-text-muted'
+                    isActive ? 'border-b-2 border-primary text-primary' : 'text-text-muted'
                   )}
                 >
                   <span>{item.icon}</span>
@@ -83,9 +81,7 @@ export function Layout({ children }: LayoutProps) {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        {children}
-      </main>
+      <main className="container mx-auto px-4 py-8">{children}</main>
 
       {/* Footer */}
       <footer className="mt-16 border-t-2 border-border-dark bg-card-dark py-8">
