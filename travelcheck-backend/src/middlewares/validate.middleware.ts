@@ -68,7 +68,12 @@ function validate(data: Record<string, unknown>, schema: ValidationSchema): stri
     }
 
     // Pattern validation for strings
-    if (rules.type === 'string' && typeof value === 'string' && rules.pattern && !rules.pattern.test(value)) {
+    if (
+      rules.type === 'string' &&
+      typeof value === 'string' &&
+      rules.pattern &&
+      !rules.pattern.test(value)
+    ) {
       errors.push(`${field} format is invalid`)
     }
 

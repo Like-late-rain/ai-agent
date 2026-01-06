@@ -3,9 +3,9 @@
  * @description Page for browsing attraction tasks
  */
 
+import { TaskCard } from '@/components/business/TaskCard'
 import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
-import { TaskCard } from '@/components/business/TaskCard'
 import type { AttractionTask } from '@/types/models.types'
 import { useState } from 'react'
 

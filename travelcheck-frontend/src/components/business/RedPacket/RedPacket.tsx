@@ -52,7 +52,7 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
 
     const updateTimeRemaining = () => {
       const now = new Date()
-      const expireDate = new Date(reward.expireAt!)
+      const expireDate = new Date(reward.expireAt || '')
       const diff = expireDate.getTime() - now.getTime()
 
       if (diff <= 0) {
@@ -110,11 +110,9 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
       {/* Decorative pattern */}
       <div className="absolute inset-0 opacity-10">
         <svg
-          role="img"
           aria-hidden="true"
           className="w-full h-full"
           viewBox="0 0 100 100"
-          aria-hidden="true"
           preserveAspectRatio="none"
         >
           <pattern id="pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -130,12 +128,10 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
         <div className="text-center">
           <div className="w-16 h-16 mx-auto mb-4 bg-yellow-400 rounded-full flex items-center justify-center">
             <svg
-              role="img"
               aria-hidden="true"
               className="w-10 h-10 text-red-600"
               fill="currentColor"
               viewBox="0 0 20 20"
-              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"
@@ -234,7 +230,7 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(10)].map((_, i) => (
             <div
-              key={i}
+              key={`sparkle-${reward.id}-${i}-${Date.now()}`}
               className="absolute w-2 h-2 bg-yellow-300 rounded-full animate-sparkle"
               style={{
                 left: `${Math.random() * 100}%`,

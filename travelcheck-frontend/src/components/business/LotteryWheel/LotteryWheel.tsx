@@ -124,6 +124,7 @@ export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWh
               transform: `rotate(${rotation}deg)`,
             }}
             viewBox="0 0 100 100"
+            role="img"
             aria-label="Lottery wheel"
           >
             {/* Draw prize slices */}

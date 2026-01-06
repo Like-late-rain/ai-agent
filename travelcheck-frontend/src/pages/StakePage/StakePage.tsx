@@ -3,14 +3,14 @@
  * @description Page for creating and managing stakes
  */
 
+import { StakeCard } from '@/components/business/StakeCard'
 import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
 import { Input } from '@/components/common/Input'
 import { Loading } from '@/components/common/Loading'
-import { StakeCard } from '@/components/business/StakeCard'
 import { MILESTONES } from '@/constants/business'
 import type { Stake } from '@/types/models.types'
-import { useState } from 'react'
+import { type FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 /**
@@ -47,7 +47,7 @@ export function StakePage() {
     },
   ])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
@@ -76,7 +76,7 @@ export function StakePage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Type Selection */}
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Stake Type</label>
+                <div className="block text-sm font-medium text-white mb-2">Stake Type</div>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
@@ -107,10 +107,11 @@ export function StakePage() {
 
               {/* Amount Input */}
               <div>
-                <label className="block text-sm font-medium text-white mb-2">
+                <label htmlFor="amount" className="block text-sm font-medium text-white mb-2">
                   Stake Amount (TCK)
                 </label>
                 <Input
+                  id="amount"
                   type="number"
                   placeholder="Enter amount (1-1000)"
                   value={formData.amount}
@@ -124,9 +125,7 @@ export function StakePage() {
 
               {/* Milestone Selection */}
               <div>
-                <label className="block text-sm font-medium text-white mb-2">
-                  Milestone (Days)
-                </label>
+                <div className="block text-sm font-medium text-white mb-2">Milestone (Days)</div>
                 <div className="grid grid-cols-4 gap-2">
                   {MILESTONES.map((days) => (
                     <button
@@ -148,7 +147,7 @@ export function StakePage() {
 
               {/* Mode Selection */}
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Lock Mode</label>
+                <div className="block text-sm font-medium text-white mb-2">Lock Mode</div>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"

@@ -3,9 +3,9 @@
  * @description Page displaying check-in calendar
  */
 
+import { CalendarGrid } from '@/components/business/CalendarGrid'
 import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
-import { CalendarGrid } from '@/components/business/CalendarGrid'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 

@@ -6,7 +6,7 @@
 import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
 import { Input } from '@/components/common/Input'
-import { useState } from 'react'
+import { type FormEvent, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 /**
@@ -22,7 +22,7 @@ export function CheckinPage() {
     images: [] as string[],
   })
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
@@ -47,7 +47,7 @@ export function CheckinPage() {
           })
         },
         (error) => {
-          alert('Failed to get location: ' + error.message)
+          alert(`Failed to get location: ${error.message}`)
         }
       )
     } else {
@@ -70,10 +70,11 @@ export function CheckinPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Content Input */}
             <div>
-              <label className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="content" className="block text-sm font-medium text-white mb-2">
                 Share Your Experience *
               </label>
               <textarea
+                id="content"
                 className="w-full px-4 py-3 bg-background-dark border-2 border-border-dark rounded-lg text-white placeholder-text-muted focus:border-primary focus:outline-none"
                 placeholder="Tell us about your day... (minimum 200 characters)"
                 value={formData.content}
@@ -89,9 +90,12 @@ export function CheckinPage() {
 
             {/* Location */}
             <div>
-              <label className="block text-sm font-medium text-white mb-2">Location</label>
+              <label htmlFor="location-input" className="block text-sm font-medium text-white mb-2">
+                Location
+              </label>
               <div className="flex gap-2">
                 <Input
+                  id="location-input"
                   type="text"
                   value={
                     formData.location.lat && formData.location.lng
@@ -109,7 +113,7 @@ export function CheckinPage() {
 
             {/* Image Upload Placeholder */}
             <div>
-              <label className="block text-sm font-medium text-white mb-2">Photos *</label>
+              <div className="block text-sm font-medium text-white mb-2">Photos *</div>
               <div className="border-2 border-dashed border-border-dark rounded-lg p-8 text-center">
                 <div className="text-4xl mb-2">📷</div>
                 <p className="text-text-muted text-sm">Click to upload photos</p>

@@ -135,6 +135,8 @@ export function WalletConnect({ className, showBalance = true }: WalletConnectPr
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            role="img"
+            aria-label="Wallet"
           >
             <path
               strokeLinecap="round"
