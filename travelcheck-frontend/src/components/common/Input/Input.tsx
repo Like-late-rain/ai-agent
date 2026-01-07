@@ -4,7 +4,7 @@
  */
 
 import { clsx } from 'clsx'
-import type { InputHTMLAttributes } from 'react'
+import type { InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
 
 /**
  * Input component props
@@ -17,6 +17,20 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Helper text */
   helperText?: string
   /** Full width input */
+  fullWidth?: boolean
+}
+
+/**
+ * Textarea component props
+ */
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  /** Textarea label */
+  label?: string
+  /** Error message */
+  error?: string
+  /** Helper text */
+  helperText?: string
+  /** Full width textarea */
   fullWidth?: boolean
 }
 
@@ -51,7 +65,7 @@ export function Input({
   fullWidth = false,
   className,
   id,
-  ...props
+  ...inputProps
 }: InputProps) {
   const inputId = id || label?.toLowerCase().replace(/\s+/g, '-')
 
@@ -81,10 +95,10 @@ export function Input({
           stateStyles,
           textStyles,
           fullWidth && 'w-full',
-          props.disabled && 'opacity-50 cursor-not-allowed',
+          inputProps.disabled && 'opacity-50 cursor-not-allowed',
           className
         )}
-        {...props}
+        {...inputProps}
       />
 
       {error && <p className="mt-1 text-sm text-red-400">{error}</p>}
@@ -111,8 +125,8 @@ export function Textarea({
   fullWidth = false,
   className,
   id,
-  ...props
-}: InputProps & { rows?: number }) {
+  ...textareaProps
+}: TextareaProps) {
   const inputId = id || label?.toLowerCase().replace(/\s+/g, '-')
 
   const baseStyles =
@@ -141,10 +155,10 @@ export function Textarea({
           stateStyles,
           textStyles,
           fullWidth && 'w-full',
-          props.disabled && 'opacity-50 cursor-not-allowed',
+          textareaProps.disabled && 'opacity-50 cursor-not-allowed',
           className
         )}
-        {...(props as never)}
+        {...textareaProps}
       />
 
       {error && <p className="mt-1 text-sm text-red-400">{error}</p>}

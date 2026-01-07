@@ -108,6 +108,7 @@ export function ToastContainer() {
 
       return () => clearTimeout(timer)
     }
+    return undefined
   }, [toast])
 
   if (!toast) {

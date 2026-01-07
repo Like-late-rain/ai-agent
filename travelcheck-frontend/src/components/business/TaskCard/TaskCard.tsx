@@ -148,7 +148,7 @@ export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardPro
                 clipRule="evenodd"
               />
             </svg>
-            <span>{task.location}</span>
+            <span>{task.location.name}</span>
           </div>
         </div>
 
@@ -174,8 +174,8 @@ export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardPro
             <p className="text-sm font-semibold text-white">{formatAmount(task.minStake)} TCK</p>
           </div>
           <div>
-            <p className="text-xs text-text-muted mb-1">Participants</p>
-            <p className="text-sm font-semibold text-white">{task.participants}</p>
+            <p className="text-xs text-text-muted mb-1">Difficulty</p>
+            <p className="text-sm font-semibold text-white">{difficultyLabel}</p>
           </div>
         </div>
 

@@ -21,14 +21,19 @@ export function AttractionsPage() {
       id: '1',
       name: 'Great Wall Challenge',
       description: 'Visit and check in at the magnificent Great Wall of China',
-      location: 'Beijing, China',
+      location: {
+        name: 'Great Wall of China',
+        address: 'Huairou District, Beijing, China',
+        lat: 40.4319,
+        lng: 116.5704,
+        radius: 500,
+      },
       coverImage: 'https://picsum.photos/400/300?random=1',
       overviewImage: 'https://picsum.photos/800/600?random=1',
       duration: 7,
       difficulty: 'hard',
       rewardApy: 25,
       minStake: 100,
-      participants: 156,
       startDate: new Date('2024-01-01'),
       endDate: new Date('2024-02-01'),
       status: 'active',
@@ -38,14 +43,19 @@ export function AttractionsPage() {
       id: '2',
       name: 'Cherry Blossom Tour',
       description: 'Experience the beauty of Japanese cherry blossoms in spring',
-      location: 'Tokyo, Japan',
+      location: {
+        name: 'Shinjuku Gyoen National Garden',
+        address: '11 Naitomachi, Shinjuku City, Tokyo 160-0014, Japan',
+        lat: 35.6852,
+        lng: 139.7103,
+        radius: 300,
+      },
       coverImage: 'https://picsum.photos/400/300?random=2',
       overviewImage: 'https://picsum.photos/800/600?random=2',
       duration: 5,
       difficulty: 'easy',
       rewardApy: 15,
       minStake: 50,
-      participants: 234,
       startDate: new Date('2024-03-01'),
       endDate: new Date('2024-04-15'),
       status: 'upcoming',
@@ -55,14 +65,19 @@ export function AttractionsPage() {
       id: '3',
       name: 'Alpine Adventure',
       description: 'Explore the stunning Swiss Alps and mountain villages',
-      location: 'Zermatt, Switzerland',
+      location: {
+        name: 'Matterhorn',
+        address: 'Zermatt, Valais 3920, Switzerland',
+        lat: 45.9763,
+        lng: 7.6586,
+        radius: 1000,
+      },
       coverImage: 'https://picsum.photos/400/300?random=3',
       overviewImage: 'https://picsum.photos/800/600?random=3',
       duration: 10,
       difficulty: 'medium',
       rewardApy: 20,
       minStake: 200,
-      participants: 89,
       startDate: new Date('2024-01-10'),
       endDate: new Date('2024-01-25'),
       status: 'expiring',
@@ -128,9 +143,9 @@ export function AttractionsPage() {
         </Card>
         <Card>
           <Card.Body>
-            <p className="text-sm text-text-muted mb-1">Total Participants</p>
+            <p className="text-sm text-text-muted mb-1">Total Rewards</p>
             <p className="text-2xl font-bold text-primary">
-              {tasks.reduce((sum, task) => sum + task.participants, 0)}
+              {tasks.reduce((sum, task) => sum + task.minStake, 0)} TCK
             </p>
           </Card.Body>
         </Card>

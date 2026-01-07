@@ -34,7 +34,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
  *   <h2>Interactive Card</h2>
  * </Card>
  */
-export function Card({
+function CardRoot({
   children,
   padding = 'md',
   hoverable = false,
@@ -120,3 +120,10 @@ export function CardFooter({ children, className, ...props }: HTMLAttributes<HTM
     </div>
   )
 }
+
+// Compose Card with sub-components
+export const Card = Object.assign(CardRoot, {
+  Header: CardHeader,
+  Body: CardBody,
+  Footer: CardFooter,
+})

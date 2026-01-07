@@ -105,6 +105,7 @@ export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWh
       }, 3000)
       return () => clearTimeout(timer)
     }
+    return undefined
   }, [result])
 
   return (

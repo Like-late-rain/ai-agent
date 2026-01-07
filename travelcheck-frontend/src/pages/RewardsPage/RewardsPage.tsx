@@ -6,7 +6,6 @@
 import { LotteryWheel } from '@/components/business/LotteryWheel'
 import { RedPacket } from '@/components/business/RedPacket'
 import { Badge } from '@/components/common/Badge'
-import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
 import type { LotteryPrize, Reward } from '@/types/models.types'
 import { useState } from 'react'
