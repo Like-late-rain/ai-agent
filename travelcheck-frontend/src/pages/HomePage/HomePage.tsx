@@ -8,6 +8,7 @@ import { Card } from '@/components/common/Card'
 import { Loading } from '@/components/common/Loading'
 import { useWallet } from '@/hooks/useWallet'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 /**
@@ -15,6 +16,7 @@ import { Link } from 'react-router-dom'
  */
 export function HomePage() {
   const { isConnected, address } = useWallet()
+  const { t } = useTranslation()
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState({
     totalStakes: 0,
@@ -49,13 +51,10 @@ export function HomePage() {
         <Card className="max-w-md text-center">
           <Card.Body>
             <div className="text-6xl mb-4">✈️</div>
-            <h1 className="text-3xl font-bold text-primary mb-4">Welcome to TravelCheck</h1>
-            <p className="text-text-muted mb-6">
-              Explore the world and earn rewards with blockchain technology. Check in at amazing
-              locations, complete challenges, and build your travel portfolio.
-            </p>
+            <h1 className="text-3xl font-bold text-primary mb-4">{t('home.welcomeTitle')}</h1>
+            <p className="text-text-muted mb-6">{t('home.welcomeDescription')}</p>
             <div className="bg-background-dark rounded-lg p-4 mb-6">
-              <p className="text-sm text-text-muted">Please connect your wallet to get started</p>
+              <p className="text-sm text-text-muted">{t('home.connectWalletPrompt')}</p>
             </div>
           </Card.Body>
         </Card>
@@ -75,7 +74,7 @@ export function HomePage() {
     <div className="space-y-6">
       {/* Welcome Section */}
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2">Welcome back!</h1>
+        <h1 className="text-3xl font-bold text-white mb-2">{t('home.welcomeBack')}</h1>
         <p className="text-text-muted">
           {address?.slice(0, 6)}...{address?.slice(-4)}
         </p>
@@ -87,7 +86,7 @@ export function HomePage() {
           <Card.Body>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-text-muted">Total Stakes</p>
+                <p className="text-sm text-text-muted">{t('home.totalStakes')}</p>
                 <p className="text-2xl font-bold text-white mt-1">{stats.totalStakes}</p>
               </div>
               <div className="text-3xl">💰</div>
@@ -99,7 +98,7 @@ export function HomePage() {
           <Card.Body>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-text-muted">Active Stakes</p>
+                <p className="text-sm text-text-muted">{t('home.activeStakes')}</p>
                 <p className="text-2xl font-bold text-primary mt-1">{stats.activeStakes}</p>
               </div>
               <div className="text-3xl">🔥</div>
@@ -111,7 +110,7 @@ export function HomePage() {
           <Card.Body>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-text-muted">Total Check-ins</p>
+                <p className="text-sm text-text-muted">{t('home.totalCheckins')}</p>
                 <p className="text-2xl font-bold text-white mt-1">{stats.totalCheckins}</p>
               </div>
               <div className="text-3xl">✅</div>
@@ -123,8 +122,10 @@ export function HomePage() {
           <Card.Body>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-text-muted">Current Streak</p>
-                <p className="text-2xl font-bold text-primary mt-1">{stats.currentStreak} days</p>
+                <p className="text-sm text-text-muted">{t('home.currentStreak')}</p>
+                <p className="text-2xl font-bold text-primary mt-1">
+                  {stats.currentStreak} {t('common.days')}
+                </p>
               </div>
               <div className="text-3xl">🏆</div>
             </div>
@@ -135,23 +136,23 @@ export function HomePage() {
       {/* Quick Actions */}
       <Card>
         <Card.Header>
-          <h2 className="text-xl font-semibold text-white">Quick Actions</h2>
+          <h2 className="text-xl font-semibold text-white">{t('home.quickActions')}</h2>
         </Card.Header>
         <Card.Body>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link to="/stake">
               <Button variant="primary" fullWidth size="lg">
-                Create New Stake
+                {t('home.createNewStake')}
               </Button>
             </Link>
             <Link to="/attractions">
               <Button variant="outline" fullWidth size="lg">
-                Explore Attractions
+                {t('home.exploreAttractions')}
               </Button>
             </Link>
             <Link to="/rewards">
               <Button variant="outline" fullWidth size="lg">
-                View Rewards
+                {t('home.viewRewards')}
               </Button>
             </Link>
           </div>
@@ -161,35 +162,29 @@ export function HomePage() {
       {/* Info Card */}
       <Card>
         <Card.Header>
-          <h2 className="text-xl font-semibold text-white">How it Works</h2>
+          <h2 className="text-xl font-semibold text-white">{t('home.howItWorks')}</h2>
         </Card.Header>
         <Card.Body>
           <div className="space-y-4">
             <div className="flex gap-4">
               <div className="text-2xl">1️⃣</div>
               <div>
-                <h3 className="font-semibold text-white mb-1">Create a Stake</h3>
-                <p className="text-sm text-text-muted">
-                  Choose between daily check-ins or attraction challenges and stake TCK tokens
-                </p>
+                <h3 className="font-semibold text-white mb-1">{t('home.step1.title')}</h3>
+                <p className="text-sm text-text-muted">{t('home.step1.description')}</p>
               </div>
             </div>
             <div className="flex gap-4">
               <div className="text-2xl">2️⃣</div>
               <div>
-                <h3 className="font-semibold text-white mb-1">Check In Daily</h3>
-                <p className="text-sm text-text-muted">
-                  Share your travel moments and maintain your check-in streak
-                </p>
+                <h3 className="font-semibold text-white mb-1">{t('home.step2.title')}</h3>
+                <p className="text-sm text-text-muted">{t('home.step2.description')}</p>
               </div>
             </div>
             <div className="flex gap-4">
               <div className="text-2xl">3️⃣</div>
               <div>
-                <h3 className="font-semibold text-white mb-1">Earn Rewards</h3>
-                <p className="text-sm text-text-muted">
-                  Get interest, red packets, and lottery chances for your dedication
-                </p>
+                <h3 className="font-semibold text-white mb-1">{t('home.step3.title')}</h3>
+                <p className="text-sm text-text-muted">{t('home.step3.description')}</p>
               </div>
             </div>
           </div>

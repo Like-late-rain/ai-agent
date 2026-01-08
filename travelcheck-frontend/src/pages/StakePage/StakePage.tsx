@@ -10,6 +10,7 @@ import { Input } from '@/components/common/Input'
 import { MILESTONES } from '@/constants/business'
 import type { Stake } from '@/types/models.types'
 import { type FormEvent, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 /**
@@ -17,6 +18,7 @@ import { useNavigate } from 'react-router-dom'
  */
 export function StakePage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     type: 'daily' as 'daily' | 'attraction',
@@ -61,21 +63,21 @@ export function StakePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2">Create Stake</h1>
-        <p className="text-text-muted">Stake TCK tokens and start your journey</p>
+        <h1 className="text-3xl font-bold text-white mb-2">{t('stake.title')}</h1>
+        <p className="text-text-muted">{t('stake.subtitle')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Create Stake Form */}
         <Card>
           <Card.Header>
-            <h2 className="text-xl font-semibold text-white">New Stake</h2>
+            <h2 className="text-xl font-semibold text-white">{t('stake.newStake')}</h2>
           </Card.Header>
           <Card.Body>
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Type Selection */}
               <div>
-                <div className="block text-sm font-medium text-white mb-2">Stake Type</div>
+                <div className="block text-sm font-medium text-white mb-2">{t('stake.stakeType')}</div>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
@@ -87,7 +89,7 @@ export function StakePage() {
                     }`}
                   >
                     <div className="text-2xl mb-1">📅</div>
-                    <div className="font-medium">Daily Task</div>
+                    <div className="font-medium">{t('stake.dailyTask')}</div>
                   </button>
                   <button
                     type="button"
@@ -99,7 +101,7 @@ export function StakePage() {
                     }`}
                   >
                     <div className="text-2xl mb-1">🗺️</div>
-                    <div className="font-medium">Attraction</div>
+                    <div className="font-medium">{t('stake.attraction')}</div>
                   </button>
                 </div>
               </div>
@@ -107,24 +109,24 @@ export function StakePage() {
               {/* Amount Input */}
               <div>
                 <label htmlFor="amount" className="block text-sm font-medium text-white mb-2">
-                  Stake Amount (TCK)
+                  {t('stake.stakeAmount')}
                 </label>
                 <Input
                   id="amount"
                   type="number"
-                  placeholder="Enter amount (1-1000)"
+                  placeholder={t('stake.enterAmount')}
                   value={formData.amount}
                   onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                   min="1"
                   max="1000"
                   required
                 />
-                <p className="text-xs text-text-muted mt-1">Minimum: 1 TCK, Maximum: 1000 TCK</p>
+                <p className="text-xs text-text-muted mt-1">{t('stake.minMaxAmount')}</p>
               </div>
 
               {/* Milestone Selection */}
               <div>
-                <div className="block text-sm font-medium text-white mb-2">Milestone (Days)</div>
+                <div className="block text-sm font-medium text-white mb-2">{t('stake.milestone')}</div>
                 <div className="grid grid-cols-4 gap-2">
                   {MILESTONES.map((days) => (
                     <button
@@ -138,7 +140,7 @@ export function StakePage() {
                       }`}
                     >
                       <div className="font-bold">{days}</div>
-                      <div className="text-xs">days</div>
+                      <div className="text-xs">{t('common.days')}</div>
                     </button>
                   ))}
                 </div>
@@ -146,7 +148,7 @@ export function StakePage() {
 
               {/* Mode Selection */}
               <div>
-                <div className="block text-sm font-medium text-white mb-2">Lock Mode</div>
+                <div className="block text-sm font-medium text-white mb-2">{t('stake.lockMode')}</div>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
@@ -157,8 +159,8 @@ export function StakePage() {
                         : 'border-border-dark hover:border-primary'
                     }`}
                   >
-                    <div className="font-medium text-white mb-1">🔒 Sealed</div>
-                    <div className="text-xs text-text-muted">Higher rewards, locked period</div>
+                    <div className="font-medium text-white mb-1">🔒 {t('stake.sealed')}</div>
+                    <div className="text-xs text-text-muted">{t('stake.sealedDescription')}</div>
                   </button>
                   <button
                     type="button"
@@ -169,8 +171,8 @@ export function StakePage() {
                         : 'border-border-dark hover:border-primary'
                     }`}
                   >
-                    <div className="font-medium text-white mb-1">🔓 Anytime</div>
-                    <div className="text-xs text-text-muted">Lower rewards, withdraw anytime</div>
+                    <div className="font-medium text-white mb-1">🔓 {t('stake.anytime')}</div>
+                    <div className="text-xs text-text-muted">{t('stake.anytimeDescription')}</div>
                   </button>
                 </div>
               </div>
@@ -183,7 +185,7 @@ export function StakePage() {
                 loading={loading}
                 disabled={loading || !formData.amount}
               >
-                {loading ? 'Creating...' : 'Create Stake'}
+                {loading ? t('stake.creating') : t('stake.createStake')}
               </Button>
             </form>
           </Card.Body>
@@ -193,33 +195,33 @@ export function StakePage() {
         <div className="space-y-4">
           <Card>
             <Card.Header>
-              <h2 className="text-xl font-semibold text-white">Interest Rates</h2>
+              <h2 className="text-xl font-semibold text-white">{t('stake.interestRates')}</h2>
             </Card.Header>
             <Card.Body>
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-text-muted">30 Days</span>
+                  <span className="text-text-muted">30 {t('common.days')}</span>
                   <div className="flex gap-4">
                     <span className="text-primary font-medium">5%</span>
                     <span className="text-text-muted">2.5%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-text-muted">100 Days</span>
+                  <span className="text-text-muted">100 {t('common.days')}</span>
                   <div className="flex gap-4">
                     <span className="text-primary font-medium">8%</span>
                     <span className="text-text-muted">4%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-text-muted">200 Days</span>
+                  <span className="text-text-muted">200 {t('common.days')}</span>
                   <div className="flex gap-4">
                     <span className="text-primary font-medium">14%</span>
                     <span className="text-text-muted">7%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-text-muted">365 Days</span>
+                  <span className="text-text-muted">365 {t('common.days')}</span>
                   <div className="flex gap-4">
                     <span className="text-primary font-medium">20%</span>
                     <span className="text-text-muted">10%</span>
@@ -227,8 +229,8 @@ export function StakePage() {
                 </div>
                 <div className="pt-2 border-t border-border-dark">
                   <div className="flex gap-4 text-xs">
-                    <span className="text-primary">Sealed Mode</span>
-                    <span className="text-text-muted">Anytime Mode</span>
+                    <span className="text-primary">{t('stake.sealedMode')}</span>
+                    <span className="text-text-muted">{t('stake.anytimeMode')}</span>
                   </div>
                 </div>
               </div>
@@ -237,21 +239,21 @@ export function StakePage() {
 
           <Card>
             <Card.Header>
-              <h2 className="text-xl font-semibold text-white">Rewards</h2>
+              <h2 className="text-xl font-semibold text-white">{t('stake.rewards')}</h2>
             </Card.Header>
             <Card.Body>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🧧</span>
-                  <span className="text-text-muted">Daily red packets (0.1%-0.3%)</span>
+                  <span className="text-text-muted">{t('stake.dailyRedPackets')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🎰</span>
-                  <span className="text-text-muted">Lottery chances for prizes</span>
+                  <span className="text-text-muted">{t('stake.lotteryChances')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🏆</span>
-                  <span className="text-text-muted">Achievement badges</span>
+                  <span className="text-text-muted">{t('stake.achievementBadges')}</span>
                 </div>
               </div>
             </Card.Body>
@@ -262,7 +264,7 @@ export function StakePage() {
       {/* Existing Stakes */}
       {stakes.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-white mb-4">Your Stakes</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">{t('stake.yourStakes')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {stakes.map((stake) => (
               <StakeCard

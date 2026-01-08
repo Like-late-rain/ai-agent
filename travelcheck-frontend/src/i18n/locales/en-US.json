@@ -1,0 +1,108 @@
+{
+  "common": {
+    "appName": "TravelCheck",
+    "connectWallet": "Connect Wallet",
+    "disconnect": "Disconnect",
+    "loading": "Loading...",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "days": "days"
+  },
+  "nav": {
+    "home": "Home",
+    "leaderboard": "Leaderboard",
+    "myNFT": "My NFT"
+  },
+  "home": {
+    "title": "Explore the World, On-Chain.",
+    "subtitle": "Stake tokens, check-in at destinations, and earn real rewards. Join the decentralized travel community today.",
+    "liveOnMainnet": "LIVE ON MAINNET",
+    "dailyTaskCheckin": {
+      "title": "Daily Task Check-in",
+      "description": "Keep your streak alive. Stake 10TC to start earning daily multipliers.",
+      "streak": "Streak: 5 Days",
+      "startCheckin": "Start Check-In"
+    },
+    "attractionHunt": {
+      "title": "Attraction Hunt",
+      "description": "Discover 500+ global landmarks. 12k Travelers active right now.",
+      "locationsNearby": "locations nearby",
+      "viewTasks": "View Tasks"
+    },
+    "stats": {
+      "globalParticipants": "GLOBAL PARTICIPANTS",
+      "tasksCompleted": "TASKS COMPLETED",
+      "activeToday": "ACTIVE TODAY"
+    },
+    "welcomeBack": "Welcome back!",
+    "totalStakes": "Total Stakes",
+    "activeStakes": "Active Stakes",
+    "totalCheckins": "Total Check-ins",
+    "currentStreak": "Current Streak",
+    "quickActions": "Quick Actions",
+    "createNewStake": "Create New Stake",
+    "exploreAttractions": "Explore Attractions",
+    "viewRewards": "View Rewards",
+    "howItWorks": "How it Works",
+    "step1": {
+      "title": "Create a Stake",
+      "description": "Choose between daily check-ins or attraction challenges and stake TCK tokens"
+    },
+    "step2": {
+      "title": "Check In Daily",
+      "description": "Share your travel moments and maintain your check-in streak"
+    },
+    "step3": {
+      "title": "Earn Rewards",
+      "description": "Get interest, red packets, and lottery chances for your dedication"
+    },
+    "connectWalletPrompt": "Please connect your wallet to get started",
+    "welcomeTitle": "Welcome to TravelCheck",
+    "welcomeDescription": "Explore the world and earn rewards with blockchain technology. Check in at amazing locations, complete challenges, and build your travel portfolio."
+  },
+  "stake": {
+    "title": "Create Stake",
+    "subtitle": "Stake TCK tokens and start your journey",
+    "newStake": "New Stake",
+    "yourStakes": "Your Stakes",
+    "stakeType": "Stake Type",
+    "dailyTask": "Daily Task",
+    "attraction": "Attraction",
+    "stakeAmount": "Stake Amount (TCK)",
+    "enterAmount": "Enter amount (1-1000)",
+    "minMaxAmount": "Minimum: 1 TCK, Maximum: 1000 TCK",
+    "milestone": "Milestone (Days)",
+    "lockMode": "Lock Mode",
+    "sealed": "Sealed",
+    "sealedDescription": "Higher rewards, locked period",
+    "anytime": "Anytime",
+    "anytimeDescription": "Lower rewards, withdraw anytime",
+    "createStake": "Create Stake",
+    "creating": "Creating...",
+    "interestRates": "Interest Rates",
+    "rewards": "Rewards",
+    "dailyRedPackets": "Daily red packets (0.1%-0.3%)",
+    "lotteryChances": "Lottery chances for prizes",
+    "achievementBadges": "Achievement badges",
+    "sealedMode": "Sealed Mode",
+    "anytimeMode": "Anytime Mode"
+  },
+  "rewards": {
+    "title": "My Rewards",
+    "subtitle": "View your rewards and benefits"
+  },
+  "attractions": {
+    "title": "Attractions",
+    "subtitle": "Explore amazing locations"
+  },
+  "footer": {
+    "copyright": "© 2024 TravelCheck. All rights reserved.",
+    "tagline": "Explore the world, earn rewards with blockchain"
+  }
+}

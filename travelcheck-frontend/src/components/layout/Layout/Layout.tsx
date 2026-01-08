@@ -6,6 +6,7 @@
 import { WalletConnect } from '@/components/business/WalletConnect'
 import { clsx } from 'clsx'
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useLocation } from 'react-router-dom'
 
 /**
@@ -17,16 +18,6 @@ export interface LayoutProps {
 }
 
 /**
- * Navigation items
- */
-const navItems = [
-  { path: '/', label: 'Home', icon: '🏠' },
-  { path: '/stake', label: 'Stake', icon: '💰' },
-  { path: '/attractions', label: 'Attractions', icon: '🗺️' },
-  { path: '/rewards', label: 'Rewards', icon: '🎁' },
-]
-
-/**
  * Layout Component
  *
  * @example
@@ -36,58 +27,102 @@ const navItems = [
  */
 export function Layout({ children }: LayoutProps) {
   const location = useLocation()
+  const { t, i18n } = useTranslation()
+
+  const navItems = [
+    { path: '/', label: t('nav.home'), icon: '🏠' },
+    { path: '/leaderboard', label: t('nav.leaderboard'), icon: '🏆' },
+    { path: '/my-nft', label: t('nav.myNFT'), icon: '🎨' },
+  ]
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'zh-CN' ? 'en-US' : 'zh-CN'
+    i18n.changeLanguage(newLang)
+  }
 
   return (
     <div className="min-h-screen bg-background-dark text-white">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b-2 border-border-dark bg-background-dark/95 backdrop-blur">
-        <div className="container mx-auto px-4 py-4">
+      <header className="sticky top-0 z-40 bg-background-dark/95 backdrop-blur">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <span className="text-2xl">✈️</span>
-              <span className="text-xl font-bold text-primary">TravelCheck</span>
-            </Link>
+            {/* Logo and Navigation */}
+            <div className="flex items-center gap-12">
+              <Link to="/" className="flex items-center gap-2">
+                <span className="text-2xl">✈️</span>
+                <span className="text-xl font-bold text-white">{t('common.appName')}</span>
+              </Link>
 
-            {/* Wallet Connect */}
-            <WalletConnect />
+              {/* Navigation Items - Horizontal */}
+              <nav className="hidden md:flex items-center gap-8">
+                {navItems.map((item) => {
+                  const isActive = location.pathname === item.path
+                  return (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={clsx(
+                        'font-medium transition-colors text-sm',
+                        isActive ? 'text-white' : 'text-gray-400 hover:text-white'
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
+              </nav>
+            </div>
+
+            {/* Right Side: Language Switcher + Wallet */}
+            <div className="flex items-center gap-4">
+              {/* Language Switcher */}
+              <button
+                onClick={toggleLanguage}
+                className="px-3 py-1.5 text-sm font-medium text-gray-400 hover:text-white transition-colors border border-gray-700 rounded-lg hover:border-gray-500"
+                type="button"
+              >
+                {i18n.language === 'zh-CN' ? 'EN' : '中文'}
+              </button>
+
+              {/* Wallet Connect */}
+              <WalletConnect />
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className="md:hidden border-t border-border-dark">
+          <div className="container mx-auto px-6">
+            <div className="flex items-center gap-1 overflow-x-auto py-2">
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={clsx(
+                      'flex items-center gap-2 px-4 py-2 font-medium transition-colors text-sm whitespace-nowrap rounded-lg',
+                      isActive ? 'bg-primary/20 text-primary' : 'text-text-muted hover:text-white'
+                    )}
+                  >
+                    <span>{item.icon}</span>
+                    <span>{item.label}</span>
+                  </Link>
+                )
+              })}
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Navigation */}
-      <nav className="sticky top-[73px] z-30 border-b-2 border-border-dark bg-card-dark">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center gap-1 overflow-x-auto">
-            {navItems.map((item) => {
-              const isActive = location.pathname === item.path
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={clsx(
-                    'flex items-center gap-2 px-4 py-3 font-medium transition-colors',
-                    'hover:text-primary',
-                    isActive ? 'border-b-2 border-primary text-primary' : 'text-text-muted'
-                  )}
-                >
-                  <span>{item.icon}</span>
-                  <span>{item.label}</span>
-                </Link>
-              )
-            })}
-          </div>
-        </div>
-      </nav>
-
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">{children}</main>
+      <main className="container mx-auto px-6 py-8">{children}</main>
 
       {/* Footer */}
       <footer className="mt-16 border-t-2 border-border-dark bg-card-dark py-8">
-        <div className="container mx-auto px-4 text-center text-text-muted text-sm">
-          <p>&copy; 2024 TravelCheck. All rights reserved.</p>
-          <p className="mt-2">Explore the world, earn rewards with blockchain</p>
+        <div className="container mx-auto px-6 text-center text-text-muted text-sm">
+          <p>{t('footer.copyright')}</p>
+          <p className="mt-2">{t('footer.tagline')}</p>
         </div>
       </footer>
     </div>

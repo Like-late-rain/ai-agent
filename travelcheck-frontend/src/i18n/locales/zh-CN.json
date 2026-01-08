@@ -1,0 +1,108 @@
+{
+  "common": {
+    "appName": "TravelCheck",
+    "connectWallet": "连接钱包",
+    "disconnect": "断开连接",
+    "loading": "加载中...",
+    "confirm": "确认",
+    "cancel": "取消",
+    "submit": "提交",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "back": "返回",
+    "next": "下一步",
+    "days": "天"
+  },
+  "nav": {
+    "home": "首页",
+    "leaderboard": "排行榜",
+    "myNFT": "我的NFT"
+  },
+  "home": {
+    "title": "探索世界，上链。",
+    "subtitle": "质押代币，在目的地打卡，并获得真实奖励。今天就加入去中心化的旅行社区。",
+    "liveOnMainnet": "主网上线",
+    "dailyTaskCheckin": {
+      "title": "每日任务打卡",
+      "description": "保持你的连续打卡。质押10TCK开始每日赚取倍数。",
+      "streak": "连续打卡：5天",
+      "startCheckin": "开始打卡"
+    },
+    "attractionHunt": {
+      "title": "景点打卡",
+      "description": "发现500+全球地标。现在12k旅行者活跃。",
+      "locationsNearby": "附近景点",
+      "viewTasks": "查看任务"
+    },
+    "stats": {
+      "globalParticipants": "全球参与者",
+      "tasksCompleted": "完成任务",
+      "activeToday": "今日活跃"
+    },
+    "welcomeBack": "欢迎回来！",
+    "totalStakes": "总质押数",
+    "activeStakes": "活跃质押",
+    "totalCheckins": "总打卡数",
+    "currentStreak": "当前连续",
+    "quickActions": "快捷操作",
+    "createNewStake": "创建新质押",
+    "exploreAttractions": "探索景点",
+    "viewRewards": "查看奖励",
+    "howItWorks": "使用说明",
+    "step1": {
+      "title": "创建质押",
+      "description": "在每日打卡或景点挑战之间选择，并质押TCK代币"
+    },
+    "step2": {
+      "title": "每日打卡",
+      "description": "分享你的旅行时刻，保持打卡连续"
+    },
+    "step3": {
+      "title": "赚取奖励",
+      "description": "获得利息、红包和抽奖机会作为回报"
+    },
+    "connectWalletPrompt": "请连接你的钱包以开始",
+    "welcomeTitle": "欢迎来到 TravelCheck",
+    "welcomeDescription": "通过区块链技术探索世界并赚取奖励。在令人惊叹的地点打卡，完成挑战，建立你的旅行档案。"
+  },
+  "stake": {
+    "title": "创建质押",
+    "subtitle": "质押TCK代币，开始你的旅程",
+    "newStake": "新质押",
+    "yourStakes": "你的质押",
+    "stakeType": "质押类型",
+    "dailyTask": "每日任务",
+    "attraction": "景点",
+    "stakeAmount": "质押金额 (TCK)",
+    "enterAmount": "输入金额 (1-1000)",
+    "minMaxAmount": "最小: 1 TCK, 最大: 1000 TCK",
+    "milestone": "里程碑 (天数)",
+    "lockMode": "锁定模式",
+    "sealed": "封闭式",
+    "sealedDescription": "更高奖励，锁定期间",
+    "anytime": "随时式",
+    "anytimeDescription": "较低奖励，随时提取",
+    "createStake": "创建质押",
+    "creating": "创建中...",
+    "interestRates": "利率",
+    "rewards": "奖励",
+    "dailyRedPackets": "每日红包 (0.1%-0.3%)",
+    "lotteryChances": "抽奖机会赢取奖品",
+    "achievementBadges": "成就徽章",
+    "sealedMode": "封闭模式",
+    "anytimeMode": "随时模式"
+  },
+  "rewards": {
+    "title": "我的奖励",
+    "subtitle": "查看你的奖励和福利"
+  },
+  "attractions": {
+    "title": "景点",
+    "subtitle": "探索令人惊叹的地点"
+  },
+  "footer": {
+    "copyright": "© 2024 TravelCheck. 保留所有权利。",
+    "tagline": "探索世界，通过区块链赚取奖励"
+  }
+}
