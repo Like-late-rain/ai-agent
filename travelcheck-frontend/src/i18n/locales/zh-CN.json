@@ -12,12 +12,15 @@
     "edit": "编辑",
     "back": "返回",
     "next": "下一步",
-    "days": "天"
+    "days": "天",
+    "all": "全部"
   },
   "nav": {
     "home": "首页",
-    "leaderboard": "排行榜",
-    "myNFT": "我的NFT"
+    "checkins": "打卡",
+    "achievements": "成就",
+    "shop": "商品",
+    "profile": "个人中心"
   },
   "home": {
     "title": "探索世界，上链。",
@@ -100,6 +103,54 @@
   "attractions": {
     "title": "景点",
     "subtitle": "探索令人惊叹的地点"
+  },
+  "checkins": {
+    "title": "我的打卡",
+    "subtitle": "查看和管理你的所有打卡记录",
+    "myStakes": "我的质押",
+    "activeStakes": "活跃质押",
+    "completedStakes": "已完成质押",
+    "checkinNow": "立即打卡",
+    "viewDetails": "查看详情",
+    "noActiveStakes": "暂无活跃质押",
+    "createFirstStake": "创建你的第一个质押开始打卡之旅"
+  },
+  "achievements": {
+    "title": "我的成就",
+    "subtitle": "查看你的徽章和里程碑",
+    "badges": "徽章",
+    "stats": "统计",
+    "totalBadges": "总徽章数",
+    "totalCheckins": "总打卡数",
+    "longestStreak": "最长连续",
+    "perfectDays": "完美天数",
+    "noBadges": "还没有徽章",
+    "startEarning": "开始打卡以获得徽章"
+  },
+  "shop": {
+    "title": "奖品商店",
+    "subtitle": "使用你的积分兑换奖品",
+    "myPoints": "我的积分",
+    "availablePrizes": "可兑换奖品",
+    "physicalItems": "实物奖品",
+    "tokenRewards": "代币奖励",
+    "lottery": "抽奖",
+    "redeem": "兑换",
+    "noPrizes": "暂无可兑换奖品",
+    "checkBackLater": "稍后回来查看"
+  },
+  "profile": {
+    "title": "个人中心",
+    "subtitle": "管理你的账户和设置",
+    "myProfile": "我的资料",
+    "statistics": "统计数据",
+    "settings": "设置",
+    "totalStaked": "总质押金额",
+    "totalEarned": "总收益",
+    "memberSince": "注册时间",
+    "editProfile": "编辑资料",
+    "changeAvatar": "更换头像",
+    "walletAddress": "钱包地址"
   },
   "footer": {
     "copyright": "© 2024 TravelCheck. 保留所有权利。",

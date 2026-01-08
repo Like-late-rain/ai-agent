@@ -31,8 +31,10 @@ export function Layout({ children }: LayoutProps) {
 
   const navItems = [
     { path: '/', label: t('nav.home'), icon: '🏠' },
-    { path: '/leaderboard', label: t('nav.leaderboard'), icon: '🏆' },
-    { path: '/my-nft', label: t('nav.myNFT'), icon: '🎨' },
+    { path: '/checkins', label: t('nav.checkins'), icon: '📝' },
+    { path: '/achievements', label: t('nav.achievements'), icon: '🏆' },
+    { path: '/shop', label: t('nav.shop'), icon: '🛍️' },
+    { path: '/profile', label: t('nav.profile'), icon: '👤' },
   ]
 
   const toggleLanguage = () => {

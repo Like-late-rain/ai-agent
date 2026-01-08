@@ -12,12 +12,15 @@
     "edit": "Edit",
     "back": "Back",
     "next": "Next",
-    "days": "days"
+    "days": "days",
+    "all": "All"
   },
   "nav": {
     "home": "Home",
-    "leaderboard": "Leaderboard",
-    "myNFT": "My NFT"
+    "checkins": "Check-ins",
+    "achievements": "Achievements",
+    "shop": "Shop",
+    "profile": "Profile"
   },
   "home": {
     "title": "Explore the World, On-Chain.",
@@ -100,6 +103,54 @@
   "attractions": {
     "title": "Attractions",
     "subtitle": "Explore amazing locations"
+  },
+  "checkins": {
+    "title": "My Check-ins",
+    "subtitle": "View and manage all your check-in records",
+    "myStakes": "My Stakes",
+    "activeStakes": "Active Stakes",
+    "completedStakes": "Completed Stakes",
+    "checkinNow": "Check-in Now",
+    "viewDetails": "View Details",
+    "noActiveStakes": "No active stakes",
+    "createFirstStake": "Create your first stake to begin your check-in journey"
+  },
+  "achievements": {
+    "title": "My Achievements",
+    "subtitle": "View your badges and milestones",
+    "badges": "Badges",
+    "stats": "Statistics",
+    "totalBadges": "Total Badges",
+    "totalCheckins": "Total Check-ins",
+    "longestStreak": "Longest Streak",
+    "perfectDays": "Perfect Days",
+    "noBadges": "No badges yet",
+    "startEarning": "Start checking in to earn badges"
+  },
+  "shop": {
+    "title": "Prize Shop",
+    "subtitle": "Redeem prizes with your points",
+    "myPoints": "My Points",
+    "availablePrizes": "Available Prizes",
+    "physicalItems": "Physical Items",
+    "tokenRewards": "Token Rewards",
+    "lottery": "Lottery",
+    "redeem": "Redeem",
+    "noPrizes": "No prizes available",
+    "checkBackLater": "Check back later"
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "Manage your account and settings",
+    "myProfile": "My Profile",
+    "statistics": "Statistics",
+    "settings": "Settings",
+    "totalStaked": "Total Staked",
+    "totalEarned": "Total Earned",
+    "memberSince": "Member Since",
+    "editProfile": "Edit Profile",
+    "changeAvatar": "Change Avatar",
+    "walletAddress": "Wallet Address"
   },
   "footer": {
     "copyright": "© 2024 TravelCheck. All rights reserved.",
