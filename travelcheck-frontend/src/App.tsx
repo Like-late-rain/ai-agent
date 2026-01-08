@@ -13,10 +13,6 @@ const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.H
 const MyCheckinsPage = lazy(() =>
   import('./pages/MyCheckinsPage').then(m => ({ default: m.MyCheckinsPage }))
 )
-const AchievementsPage = lazy(() =>
-  import('./pages/AchievementsPage').then(m => ({ default: m.AchievementsPage }))
-)
-const ShopPage = lazy(() => import('./pages/ShopPage').then(m => ({ default: m.ShopPage })))
 const ProfilePage = lazy(() =>
   import('./pages/ProfilePage').then(m => ({ default: m.ProfilePage }))
 )
@@ -44,15 +40,13 @@ export function App() {
         <Suspense fallback={<Loading size="lg" />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/checkins" element={<MyCheckinsPage />} />
-            <Route path="/achievements" element={<AchievementsPage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/stake" element={<StakePage />} />
+            <Route path="/checkins" element={<MyCheckinsPage />} />
             <Route path="/checkin/:stakeId" element={<CheckinPage />} />
             <Route path="/calendar/:stakeId" element={<CalendarPage />} />
             <Route path="/attractions" element={<AttractionsPage />} />
             <Route path="/rewards" element={<RewardsPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </Suspense>
       </Layout>

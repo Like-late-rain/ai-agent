@@ -17,15 +17,18 @@
   },
   "nav": {
     "home": "Home",
-    "checkins": "Check-ins",
-    "achievements": "Achievements",
-    "shop": "Shop",
+    "stake": "Stake",
+    "checkin": "Check-in",
+    "attractions": "Attractions",
+    "rewards": "Rewards",
     "profile": "Profile"
   },
   "home": {
     "title": "Explore the World, On-Chain.",
     "subtitle": "Stake tokens, check-in at destinations, and earn real rewards. Join the decentralized travel community today.",
     "liveOnMainnet": "LIVE ON MAINNET",
+    "newTasksAvailable": "New Tasks Available",
+    "travelers": "Travelers",
     "dailyTaskCheckin": {
       "title": "Daily Task Check-in",
       "description": "Keep your streak alive. Stake 10TC to start earning daily multipliers.",

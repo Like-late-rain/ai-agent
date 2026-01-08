@@ -1,6 +1,51 @@
 import { expect, test } from '@playwright/test'
 
 test.describe('Page Content', () => {
+  test.describe('Home Page', () => {
+    test('should display home page with design mockup content', async ({ page }) => {
+      await page.goto('/')
+
+      // Should show "LIVE ON MAINNET" badge
+      await expect(page.getByText(/live on mainnet|主网运行中/i)).toBeVisible()
+
+      // Should show main title
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+
+      // Should show Daily Task Check-in and Attraction Hunt cards
+      await expect(page.getByText(/daily task check-in|每日任务打卡/i)).toBeVisible()
+      await expect(page.getByText(/attraction hunt|景点探索/i)).toBeVisible()
+
+      // Should show global stats
+      await expect(page.getByText(/global participants|全球参与者/i)).toBeVisible()
+      await expect(page.getByText(/tasks completed|任务完成数/i)).toBeVisible()
+      await expect(page.getByText(/active today|今日活跃/i)).toBeVisible()
+    })
+
+    test('should navigate to stake page from daily task card', async ({ page }) => {
+      await page.goto('/')
+
+      // Click on Daily Task Check-in card
+      await page.getByText(/start check-in|开始打卡/i).click()
+
+      // Should navigate to stake page
+      await expect(page).toHaveURL('/stake')
+    })
+  })
+
+  test.describe('Stake Page', () => {
+    test('should display stake creation form', async ({ page }) => {
+      await page.goto('/stake')
+
+      // Should show form elements
+      await expect(page.getByText(/stake type|质押类型/i)).toBeVisible()
+      await expect(page.getByText(/daily task|每日任务/i)).toBeVisible()
+      await expect(page.getByText(/attraction|景点/i)).toBeVisible()
+      await expect(page.getByText(/stake amount|质押金额/i)).toBeVisible()
+      await expect(page.getByText(/milestone|里程碑/i)).toBeVisible()
+      await expect(page.getByText(/lock mode|锁定模式/i)).toBeVisible()
+    })
+  })
+
   test.describe('Check-ins Page', () => {
     test('should display check-ins page content', async ({ page }) => {
       await page.goto('/checkins')
@@ -25,52 +70,21 @@ test.describe('Page Content', () => {
     })
   })
 
-  test.describe('Achievements Page', () => {
-    test('should display achievements page content', async ({ page }) => {
-      await page.goto('/achievements')
+  test.describe('Attractions Page', () => {
+    test('should display attractions page', async ({ page }) => {
+      await page.goto('/attractions')
 
-      // Should show stats cards
-      await expect(page.getByText(/total badges|总徽章数/i)).toBeVisible()
-      await expect(page.getByText(/total check-ins|总打卡数/i)).toBeVisible()
-      await expect(page.getByText(/longest streak|最长连续/i)).toBeVisible()
-      await expect(page.getByText(/perfect days|完美天数/i)).toBeVisible()
-
-      // Should show badges section
-      await expect(page.getByText(/badges|徽章/i)).toBeVisible()
-    })
-
-    test('should display badges grid', async ({ page }) => {
-      await page.goto('/achievements')
-
-      // Should have badge items visible
-      const badgeSection = page.locator('text=/badges|徽章/i').locator('..')
-      await expect(badgeSection).toBeVisible()
+      // Page should load without errors
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     })
   })
 
-  test.describe('Shop Page', () => {
-    test('should display shop page content', async ({ page }) => {
-      await page.goto('/shop')
+  test.describe('Rewards Page', () => {
+    test('should display rewards page', async ({ page }) => {
+      await page.goto('/rewards')
 
-      // Should show user points
-      await expect(page.getByText(/my points|我的积分/i)).toBeVisible()
-
-      // Should show lottery section
-      await expect(page.getByText(/lottery|抽奖/i)).toBeVisible()
-
-      // Should show category filters
-      await expect(page.getByRole('button', { name: /all|全部/i })).toBeVisible()
-      await expect(page.getByRole('button', { name: /physical|实物/i })).toBeVisible()
-      await expect(page.getByRole('button', { name: /token|代币/i })).toBeVisible()
-    })
-
-    test('should allow filtering prizes by category', async ({ page }) => {
-      await page.goto('/shop')
-
-      // Click on physical items filter
-      await page.click('button:has-text("Physical"), button:has-text("实物")')
-      const physicalButton = page.locator('button').filter({ hasText: /physical|实物/i })
-      await expect(physicalButton).toHaveClass(/bg-primary/)
+      // Page should load without errors
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     })
   })
 

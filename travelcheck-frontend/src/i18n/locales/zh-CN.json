@@ -17,9 +17,10 @@
   },
   "nav": {
     "home": "首页",
-    "checkins": "打卡",
-    "achievements": "成就",
-    "shop": "商品",
+    "stake": "质押",
+    "checkin": "打卡",
+    "attractions": "景点",
+    "rewards": "奖励",
     "profile": "个人中心"
   },
   "home": {

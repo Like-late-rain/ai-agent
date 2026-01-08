@@ -55,8 +55,10 @@ export function StakePage() {
     // Simulate API call
     setTimeout(() => {
       setLoading(false)
-      alert('Stake created successfully!')
-      setFormData({ type: 'daily', amount: '', milestone: 30, mode: 'sealed' })
+      // TODO: In real implementation, get the new stake ID from API response
+      // and navigate to /checkin/:stakeId to start checking in immediately
+      // For now, navigate to checkins page to see all stakes
+      navigate('/checkins')
     }, 1500)
   }
 

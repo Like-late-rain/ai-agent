@@ -1,195 +1,195 @@
 /**
  * @file HomePage Component
- * @description Home page with user stats and quick actions
+ * @description Landing page matching the design mockup
  */
 
+import { Badge } from '@/components/common/Badge'
 import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
-import { Loading } from '@/components/common/Loading'
-import { useWallet } from '@/hooks/useWallet'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 /**
- * HomePage Component
+ * HomePage Component - Matches design mockup
  */
 export function HomePage() {
-  const { isConnected, address } = useWallet()
   const { t } = useTranslation()
-  const [loading, setLoading] = useState(true)
-  const [stats, setStats] = useState({
-    totalStakes: 0,
-    activeStakes: 0,
-    totalCheckins: 0,
-    currentStreak: 0,
+  const navigate = useNavigate()
+
+  // Mock global stats
+  const [globalStats] = useState({
+    participants: 12405,
+    participantsGrowth: 5,
+    tasksCompleted: 85200,
+    tasksGrowth: 12,
+    activeToday: 2300,
   })
 
-  /**
-   * Load user stats
-   */
-  useEffect(() => {
-    // Simulate loading stats
-    const timer = setTimeout(() => {
-      if (isConnected) {
-        setStats({
-          totalStakes: 3,
-          activeStakes: 2,
-          totalCheckins: 45,
-          currentStreak: 12,
-        })
-      }
-      setLoading(false)
-    }, 500)
-
-    return () => clearTimeout(timer)
-  }, [isConnected])
-
-  if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <Card className="max-w-md text-center">
-          <Card.Body>
-            <div className="text-6xl mb-4">✈️</div>
-            <h1 className="text-3xl font-bold text-primary mb-4">{t('home.welcomeTitle')}</h1>
-            <p className="text-text-muted mb-6">{t('home.welcomeDescription')}</p>
-            <div className="bg-background-dark rounded-lg p-4 mb-6">
-              <p className="text-sm text-text-muted">{t('home.connectWalletPrompt')}</p>
-            </div>
-          </Card.Body>
-        </Card>
-      </div>
-    )
-  }
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <Loading size="lg" />
-      </div>
-    )
-  }
+  // Mock user streak
+  const [userStreak] = useState(5)
 
   return (
-    <div className="space-y-6">
-      {/* Welcome Section */}
-      <div>
-        <h1 className="text-3xl font-bold text-white mb-2">{t('home.welcomeBack')}</h1>
-        <p className="text-text-muted">
-          {address?.slice(0, 6)}...{address?.slice(-4)}
+    <div className="space-y-12">
+      {/* Hero Section */}
+      <div className="text-center space-y-6 py-12">
+        {/* Live on Mainnet Badge */}
+        <div className="flex justify-center">
+          <Badge variant="success" size="md" className="inline-flex items-center gap-2">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            {t('home.liveOnMainnet')}
+          </Badge>
+        </div>
+
+        {/* Main Title */}
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+          {t('home.title').split('，')[0]}，
+          <br />
+          <span className="text-primary">{t('home.title').split('，')[1]}</span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-lg md:text-xl text-text-muted max-w-3xl mx-auto">
+          {t('home.subtitle')}
         </p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Main Action Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Daily Task Check-in Card */}
+        <Card className="overflow-hidden hover:border-primary transition-all cursor-pointer group">
+          <div
+            className="relative h-64 bg-gradient-to-br from-teal-900 to-teal-700 -m-4 mb-4"
+            onClick={() => navigate('/stake')}
+            onKeyDown={(e) => e.key === 'Enter' && navigate('/stake')}
+            role="button"
+            tabIndex={0}
+          >
+            {/* Background Image Placeholder */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800')] bg-cover bg-center opacity-40" />
+
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent" />
+
+            {/* Streak Badge */}
+            <div className="absolute top-4 left-4">
+              <Badge variant="success" className="flex items-center gap-2">
+                <span>🔥</span>
+                {t('home.dailyTaskCheckin.streak', { defaultValue: `Streak: ${userStreak} Days` }).replace('5', String(userStreak))}
+              </Badge>
+            </div>
+
+            {/* Content */}
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <h2 className="text-2xl font-bold text-white mb-2">
+                {t('home.dailyTaskCheckin.title')}
+              </h2>
+              <p className="text-sm text-gray-300 mb-4">
+                {t('home.dailyTaskCheckin.description')}
+              </p>
+
+              <Button variant="primary" className="group-hover:bg-primary/90">
+                {t('home.dailyTaskCheckin.startCheckin')}
+              </Button>
+            </div>
+          </div>
+        </Card>
+
+        {/* Attraction Hunt Card */}
+        <Card className="overflow-hidden hover:border-primary transition-all cursor-pointer group">
+          <div
+            className="relative h-64 bg-gradient-to-br from-blue-900 to-purple-900 -m-4 mb-4"
+            onClick={() => navigate('/attractions')}
+            onKeyDown={(e) => e.key === 'Enter' && navigate('/attractions')}
+            role="button"
+            tabIndex={0}
+          >
+            {/* Background Image Placeholder */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1514565131-fce0801e5785?w=800')] bg-cover bg-center opacity-50" />
+
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent" />
+
+            {/* New Tasks Badge */}
+            <div className="absolute top-4 right-4">
+              <Badge variant="success" className="animate-pulse">
+                {t('home.newTasksAvailable', { defaultValue: 'New Tasks Available' })}
+              </Badge>
+            </div>
+
+            {/* Content */}
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <h2 className="text-2xl font-bold text-white mb-2">
+                {t('home.attractionHunt.title')}
+              </h2>
+              <p className="text-sm text-gray-300 mb-1">
+                {t('home.attractionHunt.description')}
+              </p>
+              <p className="text-sm text-primary mb-4">
+                45 {t('home.attractionHunt.locationsNearby')}
+              </p>
+
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-background-dark group-hover:bg-white group-hover:text-background-dark">
+                {t('home.attractionHunt.viewTasks')}
+              </Button>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Global Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <Card.Body>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-text-muted">{t('home.totalStakes')}</p>
-                <p className="text-2xl font-bold text-white mt-1">{stats.totalStakes}</p>
-              </div>
-              <div className="text-3xl">💰</div>
+            <div className="flex items-center gap-2 text-text-muted text-sm mb-2">
+              <span>🌍</span>
+              <span className="uppercase tracking-wide">{t('home.stats.globalParticipants')}</span>
+            </div>
+            <div className="flex items-baseline gap-3">
+              <p className="text-4xl font-bold text-white">
+                {globalStats.participants.toLocaleString()}
+              </p>
+              <Badge variant="success" size="sm">
+                ↗ {globalStats.participantsGrowth}%
+              </Badge>
             </div>
           </Card.Body>
         </Card>
 
         <Card>
           <Card.Body>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-text-muted">{t('home.activeStakes')}</p>
-                <p className="text-2xl font-bold text-primary mt-1">{stats.activeStakes}</p>
-              </div>
-              <div className="text-3xl">🔥</div>
+            <div className="flex items-center gap-2 text-text-muted text-sm mb-2">
+              <span>✓</span>
+              <span className="uppercase tracking-wide">{t('home.stats.tasksCompleted')}</span>
+            </div>
+            <div className="flex items-baseline gap-3">
+              <p className="text-4xl font-bold text-white">
+                {(globalStats.tasksCompleted / 1000).toFixed(1)}k
+              </p>
+              <Badge variant="success" size="sm">
+                ↗ {globalStats.tasksGrowth}%
+              </Badge>
             </div>
           </Card.Body>
         </Card>
 
         <Card>
           <Card.Body>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-text-muted">{t('home.totalCheckins')}</p>
-                <p className="text-2xl font-bold text-white mt-1">{stats.totalCheckins}</p>
-              </div>
-              <div className="text-3xl">✅</div>
+            <div className="flex items-center gap-2 text-text-muted text-sm mb-2">
+              <span>⚡</span>
+              <span className="uppercase tracking-wide">{t('home.stats.activeToday')}</span>
             </div>
-          </Card.Body>
-        </Card>
-
-        <Card>
-          <Card.Body>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-text-muted">{t('home.currentStreak')}</p>
-                <p className="text-2xl font-bold text-primary mt-1">
-                  {stats.currentStreak} {t('common.days')}
-                </p>
-              </div>
-              <div className="text-3xl">🏆</div>
+            <div className="flex items-baseline gap-3">
+              <p className="text-4xl font-bold text-white">
+                {globalStats.activeToday.toLocaleString()}
+              </p>
+              <span className="text-text-muted text-sm">
+                {t('home.travelers', { defaultValue: 'Travelers' })}
+              </span>
             </div>
           </Card.Body>
         </Card>
       </div>
-
-      {/* Quick Actions */}
-      <Card>
-        <Card.Header>
-          <h2 className="text-xl font-semibold text-white">{t('home.quickActions')}</h2>
-        </Card.Header>
-        <Card.Body>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link to="/stake">
-              <Button variant="primary" fullWidth size="lg">
-                {t('home.createNewStake')}
-              </Button>
-            </Link>
-            <Link to="/attractions">
-              <Button variant="outline" fullWidth size="lg">
-                {t('home.exploreAttractions')}
-              </Button>
-            </Link>
-            <Link to="/rewards">
-              <Button variant="outline" fullWidth size="lg">
-                {t('home.viewRewards')}
-              </Button>
-            </Link>
-          </div>
-        </Card.Body>
-      </Card>
-
-      {/* Info Card */}
-      <Card>
-        <Card.Header>
-          <h2 className="text-xl font-semibold text-white">{t('home.howItWorks')}</h2>
-        </Card.Header>
-        <Card.Body>
-          <div className="space-y-4">
-            <div className="flex gap-4">
-              <div className="text-2xl">1️⃣</div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">{t('home.step1.title')}</h3>
-                <p className="text-sm text-text-muted">{t('home.step1.description')}</p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="text-2xl">2️⃣</div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">{t('home.step2.title')}</h3>
-                <p className="text-sm text-text-muted">{t('home.step2.description')}</p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="text-2xl">3️⃣</div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">{t('home.step3.title')}</h3>
-                <p className="text-sm text-text-muted">{t('home.step3.description')}</p>
-              </div>
-            </div>
-          </div>
-        </Card.Body>
-      </Card>
     </div>
   )
 }

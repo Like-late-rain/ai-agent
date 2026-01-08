@@ -31,9 +31,10 @@ export function Layout({ children }: LayoutProps) {
 
   const navItems = [
     { path: '/', label: t('nav.home'), icon: '🏠' },
-    { path: '/checkins', label: t('nav.checkins'), icon: '📝' },
-    { path: '/achievements', label: t('nav.achievements'), icon: '🏆' },
-    { path: '/shop', label: t('nav.shop'), icon: '🛍️' },
+    { path: '/stake', label: t('nav.stake'), icon: '💰' },
+    { path: '/checkins', label: t('nav.checkin'), icon: '📝' },
+    { path: '/attractions', label: t('nav.attractions'), icon: '🗺️' },
+    { path: '/rewards', label: t('nav.rewards'), icon: '🎁' },
     { path: '/profile', label: t('nav.profile'), icon: '👤' },
   ]
 
