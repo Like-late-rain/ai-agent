@@ -11,3 +11,6 @@ export * from './api.types'
 
 // 组件类型
 export * from './components.types'
+
+// 主题类型
+export * from './theme.types'

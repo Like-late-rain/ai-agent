@@ -4,6 +4,8 @@
  */
 
 import { WalletConnect } from '@/components/business/WalletConnect'
+import { ThemeBackground } from '@/components/common/ThemeBackground'
+import { ThemeSwitcher } from '@/components/common/ThemeSwitcher'
 import { clsx } from 'clsx'
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -44,9 +46,14 @@ export function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background-dark text-white">
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-background-dark/95 backdrop-blur">
+    <div className="min-h-screen bg-background-dark text-white relative overflow-hidden">
+      {/* Theme Background Pattern */}
+      <ThemeBackground className="fixed inset-0 z-0 pointer-events-none text-primary" />
+
+      {/* Content Container */}
+      <div className="relative z-10">
+        {/* Header */}
+        <header className="sticky top-0 z-40 bg-background-dark/95 backdrop-blur">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Navigation */}
@@ -76,8 +83,11 @@ export function Layout({ children }: LayoutProps) {
               </nav>
             </div>
 
-            {/* Right Side: Language Switcher + Wallet */}
+            {/* Right Side: Theme + Language Switcher + Wallet */}
             <div className="flex items-center gap-4">
+              {/* Theme Switcher */}
+              <ThemeSwitcher />
+
               {/* Language Switcher */}
               <button
                 onClick={toggleLanguage}
@@ -118,16 +128,17 @@ export function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-6 py-8">{children}</main>
+        {/* Main Content */}
+        <main className="container mx-auto px-6 py-8">{children}</main>
 
-      {/* Footer */}
-      <footer className="mt-16 border-t-2 border-border-dark bg-card-dark py-8">
-        <div className="container mx-auto px-6 text-center text-text-muted text-sm">
-          <p>{t('footer.copyright')}</p>
-          <p className="mt-2">{t('footer.tagline')}</p>
-        </div>
-      </footer>
+        {/* Footer */}
+        <footer className="mt-16 border-t-2 border-border-dark bg-card-dark py-8">
+          <div className="container mx-auto px-6 text-center text-text-muted text-sm">
+            <p>{t('footer.copyright')}</p>
+            <p className="mt-2">{t('footer.tagline')}</p>
+          </div>
+        </footer>
+      </div>
     </div>
   )
 }

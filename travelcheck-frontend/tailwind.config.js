@@ -10,20 +10,20 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#13ec5b',
-          hover: '#0fd650',
+          DEFAULT: 'var(--color-primary, #1E40AF)',
+          hover: 'var(--color-primary-hover, #1E3A8A)',
         },
         background: {
-          dark: '#102216',
+          dark: 'var(--color-background-dark, #0F172A)',
         },
         card: {
-          dark: '#1a2c20',
+          dark: 'var(--color-card-dark, #1E293B)',
         },
         border: {
-          dark: '#23482f',
+          dark: 'var(--color-border-dark, #334155)',
         },
         text: {
-          muted: '#92c9a4',
+          muted: 'var(--color-text-muted, #94A3B8)',
         },
       },
       fontFamily: {
@@ -37,8 +37,8 @@ module.exports = {
         '4xl': '2rem',
       },
       boxShadow: {
-        glow: '0 0 20px rgba(19, 236, 91, 0.3)',
-        'glow-strong': '0 0 30px rgba(19, 236, 91, 0.5)',
+        glow: '0 0 20px var(--color-glow, rgba(30, 64, 175, 0.3))',
+        'glow-strong': '0 0 30px var(--color-glow-strong, rgba(30, 64, 175, 0.5))',
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite',

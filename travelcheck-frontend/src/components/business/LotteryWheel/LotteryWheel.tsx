@@ -175,8 +175,15 @@ export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWh
             })}
 
             {/* Center circle */}
-            <circle cx="50" cy="50" r="10" fill="white" stroke="#13ec5b" strokeWidth="2" />
-            <circle cx="50" cy="50" r="8" fill="#13ec5b" />
+            <circle
+              cx="50"
+              cy="50"
+              r="10"
+              fill="white"
+              stroke="var(--color-primary)"
+              strokeWidth="2"
+            />
+            <circle cx="50" cy="50" r="8" fill="var(--color-primary)" />
           </svg>
         </div>
 

@@ -7,6 +7,7 @@ import { lazy, Suspense } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Loading } from './components/common/Loading'
 import { Layout } from './components/layout/Layout'
+import { ThemeProvider } from './contexts/ThemeContext'
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })))
@@ -35,22 +36,24 @@ const RewardsPage = lazy(() =>
  */
 export function App() {
   return (
-    <Router>
-      <Layout>
-        <Suspense fallback={<Loading size="lg" />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/stake" element={<StakePage />} />
-            <Route path="/checkins" element={<MyCheckinsPage />} />
-            <Route path="/checkin/:stakeId" element={<CheckinPage />} />
-            <Route path="/calendar/:stakeId" element={<CalendarPage />} />
-            <Route path="/attractions" element={<AttractionsPage />} />
-            <Route path="/rewards" element={<RewardsPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-          </Routes>
-        </Suspense>
-      </Layout>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Layout>
+          <Suspense fallback={<Loading size="lg" />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/stake" element={<StakePage />} />
+              <Route path="/checkins" element={<MyCheckinsPage />} />
+              <Route path="/checkin/:stakeId" element={<CheckinPage />} />
+              <Route path="/calendar/:stakeId" element={<CalendarPage />} />
+              <Route path="/attractions" element={<AttractionsPage />} />
+              <Route path="/rewards" element={<RewardsPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Routes>
+          </Suspense>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   )
 }
 
