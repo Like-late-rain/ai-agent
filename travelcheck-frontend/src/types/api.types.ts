@@ -69,6 +69,8 @@ export interface GetNonceRequest {
 export interface GetNonceResponse {
   /** 随机字符串 */
   nonce: string
+  /** 要签名的消息 */
+  message: string
 }
 
 /**

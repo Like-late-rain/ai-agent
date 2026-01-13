@@ -84,10 +84,9 @@ export const connectWalletAtom = atom(null, async (get, set) => {
     const balance = await getBalance(address)
 
     // Step 2: Get nonce from backend
-    const nonce = await getNonce(address)
+    const { nonce, message } = await getNonce(address)
 
     // Step 3: Sign message with nonce
-    const message = `Welcome to TravelCheck!\n\nPlease sign this message to authenticate.\n\nNonce: ${nonce}`
     const signature = await signMessage(message)
 
     // Step 4: Verify signature and get user data

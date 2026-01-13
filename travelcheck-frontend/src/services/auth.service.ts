@@ -17,13 +17,14 @@ import api, { extractData } from './api'
  * Get a nonce for wallet signature
  *
  * @param walletAddress - User's wallet address
- * @returns Promise resolving to nonce string
+ * @returns Promise resolving to nonce response (nonce and message)
  *
  * @example
- * const nonce = await getNonce('0x1234...')
+ * const { nonce, message } = await getNonce('0x1234...')
  * console.log('Nonce:', nonce)
+ * console.log('Message:', message)
  */
-export async function getNonce(walletAddress: string): Promise<string> {
+export async function getNonce(walletAddress: string): Promise<GetNonceResponse> {
   const request: GetNonceRequest = {
     address: walletAddress,
   }
@@ -31,7 +32,7 @@ export async function getNonce(walletAddress: string): Promise<string> {
   const response = await api.post<never, never, GetNonceRequest>('/api/auth/nonce', request)
 
   const data = extractData<GetNonceResponse>(response)
-  return data.nonce
+  return data
 }
 
 /**
