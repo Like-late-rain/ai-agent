@@ -1,10 +1,10 @@
 /**
- * Utility Functions
- * Helper functions and utilities
+ * 工具函数
+ * 辅助函数和工具集
  */
 
-// Export utility modules here
-// Example:
+// 在此导出工具模块
+// 示例:
 // export * from './dateUtils';
 // export * from './cryptoUtils';
 // export * from './validationUtils';

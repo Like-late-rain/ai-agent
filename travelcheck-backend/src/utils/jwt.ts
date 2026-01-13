@@ -1,15 +1,15 @@
 /**
- * @file JWT Utilities
- * @description JWT token generation and verification
+ * @file JWT工具
+ * @description JWT令牌生成和验证
  */
 
 import { JWT } from '@/constants/config'
 import jwt from 'jsonwebtoken'
 
 /**
- * Generate JWT token
- * @param payload - Data to encode in token
- * @returns JWT token string
+ * 生成JWT令牌
+ * @param payload - 要编码到令牌中的数据
+ * @returns JWT令牌字符串
  */
 export function generateToken(payload: object): string {
   return jwt.sign(payload, JWT.SECRET, {
@@ -18,9 +18,9 @@ export function generateToken(payload: object): string {
 }
 
 /**
- * Verify JWT token
- * @param token - JWT token to verify
- * @returns Decoded payload or null if invalid
+ * 验证JWT令牌
+ * @param token - 要验证的JWT令牌
+ * @returns 解码后的负载，无效则返回null
  */
 export function verifyToken(token: string): jwt.JwtPayload | null {
   try {
@@ -32,9 +32,9 @@ export function verifyToken(token: string): jwt.JwtPayload | null {
 }
 
 /**
- * Decode JWT token without verification
- * @param token - JWT token to decode
- * @returns Decoded payload or null if invalid
+ * 解码JWT令牌(不验证)
+ * @param token - 要解码的JWT令牌
+ * @returns 解码后的负载，无效则返回null
  */
 export function decodeToken(token: string): jwt.JwtPayload | null {
   try {
@@ -46,9 +46,9 @@ export function decodeToken(token: string): jwt.JwtPayload | null {
 }
 
 /**
- * Generate refresh token
- * @param payload - Data to encode in token
- * @returns Refresh token string
+ * 生成刷新令牌
+ * @param payload - 要编码到令牌中的数据
+ * @returns 刷新令牌字符串
  */
 export function generateRefreshToken(payload: object): string {
   return jwt.sign(payload, JWT.REFRESH_SECRET, {
@@ -57,9 +57,9 @@ export function generateRefreshToken(payload: object): string {
 }
 
 /**
- * Verify refresh token
- * @param token - Refresh token to verify
- * @returns Decoded payload or null if invalid
+ * 验证刷新令牌
+ * @param token - 要验证的刷新令牌
+ * @returns 解码后的负载，无效则返回null
  */
 export function verifyRefreshToken(token: string): jwt.JwtPayload | null {
   try {
