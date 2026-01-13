@@ -3,9 +3,11 @@
  * @description Jotai atoms for managing wallet connection and balance
  */
 
+import { getNonce, verifySignature } from '@/services/auth.service'
 import { formatAddress, formatAmount } from '@/utils/format'
-import { getBalance, connectWallet as web3ConnectWallet } from '@/utils/web3'
+import { getBalance, connectWallet as web3ConnectWallet, signMessage } from '@/utils/web3'
 import { atom } from 'jotai'
+import { setUserAtom } from './user.atom'
 
 /**
  * Wallet state interface
@@ -77,15 +79,31 @@ export const connectWalletAtom = atom(null, async (get, set) => {
   })
 
   try {
+    // Step 1: Connect to MetaMask
     const address = await web3ConnectWallet()
     const balance = await getBalance(address)
 
+    // Step 2: Get nonce from backend
+    const nonce = await getNonce(address)
+
+    // Step 3: Sign message with nonce
+    const message = `Welcome to TravelCheck!\n\nPlease sign this message to authenticate.\n\nNonce: ${nonce}`
+    const signature = await signMessage(message)
+
+    // Step 4: Verify signature and get user data
+    const { user, token } = await verifySignature(address, signature, nonce)
+
+    // Step 5: Update wallet and user state
     set(walletAtom, {
       address,
       balance,
       isConnected: true,
       isConnecting: false,
     })
+
+    set(setUserAtom, user)
+
+    console.log('Wallet connected and authenticated:', { address, token })
   } catch (error) {
     set(walletAtom, {
       address: null,
@@ -104,13 +122,18 @@ export const connectWalletAtom = atom(null, async (get, set) => {
  * const disconnectWallet = useSetAtom(disconnectWalletAtom)
  * disconnectWallet()
  */
-export const disconnectWalletAtom = atom(null, (_get, set) => {
+export const disconnectWalletAtom = atom(null, async (_get, set) => {
+  // Import clearUserAtom dynamically to avoid circular dependency
+  const { clearUserAtom } = await import('./user.atom')
+
   set(walletAtom, {
     address: null,
     balance: '0',
     isConnected: false,
     isConnecting: false,
   })
+
+  set(clearUserAtom)
 })
 
 /**

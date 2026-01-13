@@ -3,7 +3,9 @@
  */
 
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
+// In development, API calls will be proxied through webpack dev server
+// The proxy is configured in webpack.dev.js to forward /api/* to http://localhost:3000
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 export const API_TIMEOUT = 30000 // 30 seconds
 
 // Application Settings

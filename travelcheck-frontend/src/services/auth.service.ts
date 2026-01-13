@@ -25,10 +25,10 @@ import api, { extractData } from './api'
  */
 export async function getNonce(walletAddress: string): Promise<string> {
   const request: GetNonceRequest = {
-    walletAddress,
+    address: walletAddress,
   }
 
-  const response = await api.post<never, never, GetNonceRequest>('/auth/nonce', request)
+  const response = await api.post<never, never, GetNonceRequest>('/api/auth/nonce', request)
 
   const data = extractData<GetNonceResponse>(response)
   return data.nonce
@@ -55,12 +55,12 @@ export async function verifySignature(
   nonce: string
 ): Promise<VerifySignatureResponse> {
   const request: VerifySignatureRequest = {
-    walletAddress,
+    address: walletAddress,
     signature,
     nonce,
   }
 
-  const response = await api.post<never, never, VerifySignatureRequest>('/auth/verify', request)
+  const response = await api.post<never, never, VerifySignatureRequest>('/api/auth/verify', request)
 
   const data = extractData<VerifySignatureResponse>(response)
 

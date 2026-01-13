@@ -60,7 +60,7 @@ export interface PaginationResponse<T> {
  */
 export interface GetNonceRequest {
   /** 钱包地址 */
-  walletAddress: string
+  address: string
 }
 
 /**
@@ -76,7 +76,7 @@ export interface GetNonceResponse {
  */
 export interface VerifySignatureRequest {
   /** 钱包地址 */
-  walletAddress: string
+  address: string
   /** 签名 */
   signature: string
   /** Nonce */

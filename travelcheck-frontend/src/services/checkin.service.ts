@@ -28,7 +28,7 @@ import api, { extractData } from './api'
  * })
  */
 export async function submitCheckin(request: SubmitCheckinRequest): Promise<SubmitCheckinResponse> {
-  const response = await api.post<never, never, SubmitCheckinRequest>('/checkins', request)
+  const response = await api.post<never, never, SubmitCheckinRequest>('/api/checkin/daily/submit', request)
 
   return extractData<SubmitCheckinResponse>(response)
 }
@@ -48,7 +48,7 @@ export async function submitCheckin(request: SubmitCheckinRequest): Promise<Subm
  * })
  */
 export async function submitMakeup(request: SubmitMakeupRequest): Promise<SubmitMakeupResponse> {
-  const response = await api.post<never, never, SubmitMakeupRequest>('/checkins/makeup', request)
+  const response = await api.post<never, never, SubmitMakeupRequest>('/api/checkin/daily/makeup', request)
 
   return extractData<SubmitMakeupResponse>(response)
 }
@@ -70,7 +70,7 @@ export async function getCalendar(
   year: number,
   month: number
 ): Promise<GetCalendarResponse> {
-  const response = await api.get<never>(`/checkins/calendar/${stakeId}?year=${year}&month=${month}`)
+  const response = await api.get<never>(`/api/checkin/daily/calendar?stakeId=${stakeId}&year=${year}&month=${month}`)
 
   return extractData<GetCalendarResponse>(response)
 }
@@ -85,7 +85,7 @@ export async function getCalendar(
  * const checkins = await getCheckins('stake-123')
  */
 export async function getCheckins(stakeId: string): Promise<Checkin[]> {
-  const response = await api.get<never>(`/checkins/${stakeId}`)
+  const response = await api.get<never>(`/api/checkin/stake/${stakeId}`)
 
   return extractData<Checkin[]>(response)
 }
@@ -100,7 +100,7 @@ export async function getCheckins(stakeId: string): Promise<Checkin[]> {
  * const checkin = await getCheckinById('checkin-123')
  */
 export async function getCheckinById(checkinId: string): Promise<Checkin> {
-  const response = await api.get<never>(`/checkins/detail/${checkinId}`)
+  const response = await api.get<never>(`/api/checkin/${checkinId}`)
 
   return extractData<Checkin>(response)
 }
@@ -121,7 +121,7 @@ export async function getCheckinStats(stakeId: string): Promise<{
   makeupUsed: number
   currentStreak: number
 }> {
-  const response = await api.get<never>(`/checkins/${stakeId}/stats`)
+  const response = await api.get<never>(`/api/checkin/stake/${stakeId}/stats`)
 
   return extractData<{
     totalCheckins: number
@@ -148,7 +148,7 @@ export async function uploadCheckinImages(files: File[]): Promise<string[]> {
     formData.append('images', file)
   }
 
-  const response = await api.post<never, never, FormData>('/checkins/upload', formData, {
+  const response = await api.post<never, never, FormData>('/api/checkin/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

@@ -23,7 +23,7 @@ import api, { extractData } from './api'
  * console.log('Claimed amount:', result.amount)
  */
 export async function claimRedPacket(rewardId: string): Promise<ClaimRedPacketResponse> {
-  const response = await api.post<never>(`/rewards/redpacket/${rewardId}/claim`)
+  const response = await api.post<never>(`/api/rewards/redpacket/claim`, { rewardId })
 
   return extractData<ClaimRedPacketResponse>(response)
 }
@@ -38,7 +38,7 @@ export async function claimRedPacket(rewardId: string): Promise<ClaimRedPacketRe
  * console.log('Chances:', result.chances)
  */
 export async function getLotteryChances(): Promise<GetLotteryChancesResponse> {
-  const response = await api.get<never>('/rewards/lottery/chances')
+  const response = await api.get<never>('/api/rewards/lottery/chances')
 
   return extractData<GetLotteryChancesResponse>(response)
 }
@@ -53,7 +53,7 @@ export async function getLotteryChances(): Promise<GetLotteryChancesResponse> {
  * console.log('Won prize:', result.prize.name)
  */
 export async function spinLottery(): Promise<SpinLotteryResponse> {
-  const response = await api.post<never>('/rewards/lottery/spin')
+  const response = await api.post<never>('/api/rewards/lottery/spin')
 
   return extractData<SpinLotteryResponse>(response)
 }
@@ -69,7 +69,7 @@ export async function spinLottery(): Promise<SpinLotteryResponse> {
  * console.log('Available badges:', result.available)
  */
 export async function getBadges(): Promise<GetBadgesResponse> {
-  const response = await api.get<never>('/rewards/badges')
+  const response = await api.get<never>('/api/rewards/badges')
 
   return extractData<GetBadgesResponse>(response)
 }
@@ -83,7 +83,7 @@ export async function getBadges(): Promise<GetBadgesResponse> {
  * const rewards = await getRewards()
  */
 export async function getRewards(): Promise<Reward[]> {
-  const response = await api.get<never>('/rewards')
+  const response = await api.get<never>('/api/rewards')
 
   return extractData<Reward[]>(response)
 }
@@ -97,7 +97,7 @@ export async function getRewards(): Promise<Reward[]> {
  * const unclaimed = await getUnclaimedRewards()
  */
 export async function getUnclaimedRewards(): Promise<Reward[]> {
-  const response = await api.get<never>('/rewards?claimed=false')
+  const response = await api.get<never>('/api/rewards/redpacket/unclaimed')
 
   return extractData<Reward[]>(response)
 }
@@ -111,7 +111,7 @@ export async function getUnclaimedRewards(): Promise<Reward[]> {
  * const claimed = await getClaimedRewards()
  */
 export async function getClaimedRewards(): Promise<Reward[]> {
-  const response = await api.get<never>('/rewards?claimed=true')
+  const response = await api.get<never>('/api/rewards?claimed=true')
 
   return extractData<Reward[]>(response)
 }
@@ -125,7 +125,7 @@ export async function getClaimedRewards(): Promise<Reward[]> {
  * const redPackets = await getRedPacketRewards()
  */
 export async function getRedPacketRewards(): Promise<Reward[]> {
-  const response = await api.get<never>('/rewards?type=redpacket')
+  const response = await api.get<never>('/api/rewards?type=redpacket')
 
   return extractData<Reward[]>(response)
 }
@@ -139,7 +139,7 @@ export async function getRedPacketRewards(): Promise<Reward[]> {
  * const lotteryRewards = await getLotteryRewards()
  */
 export async function getLotteryRewards(): Promise<Reward[]> {
-  const response = await api.get<never>('/rewards?type=lottery')
+  const response = await api.get<never>('/api/rewards/lottery/history')
 
   return extractData<Reward[]>(response)
 }
@@ -153,7 +153,7 @@ export async function getLotteryRewards(): Promise<Reward[]> {
  * const badgeRewards = await getBadgeRewards()
  */
 export async function getBadgeRewards(): Promise<Reward[]> {
-  const response = await api.get<never>('/rewards?type=badge')
+  const response = await api.get<never>('/api/rewards?type=badge')
 
   return extractData<Reward[]>(response)
 }
@@ -172,7 +172,7 @@ export async function getRewardStats(): Promise<{
   totalClaimed: number
   pending: number
 }> {
-  const response = await api.get<never>('/rewards/stats')
+  const response = await api.get<never>('/api/rewards/stats')
 
   return extractData<{
     totalEarned: number

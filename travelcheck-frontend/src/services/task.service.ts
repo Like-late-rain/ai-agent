@@ -48,7 +48,7 @@ export async function getAttractions(
   }
 
   const queryString = queryParams.toString()
-  const url = queryString ? `/tasks/attractions?${queryString}` : '/tasks/attractions'
+  const url = queryString ? `/api/tasks/attractions?$\{queryString}` : '/api/tasks/attractions'
 
   const response = await api.get<never>(url)
 
@@ -66,7 +66,7 @@ export async function getAttractions(
  * console.log('Attraction:', attraction.name)
  */
 export async function getAttractionDetail(taskId: string): Promise<GetAttractionDetailResponse> {
-  const response = await api.get<never>(`/tasks/attractions/${taskId}`)
+  const response = await api.get<never>(`/api/tasks/attractions/$\{taskId}`)
 
   return extractData<GetAttractionDetailResponse>(response)
 }
@@ -90,7 +90,7 @@ export async function joinAttraction(
   request: JoinAttractionRequest
 ): Promise<JoinAttractionResponse> {
   const response = await api.post<never, never, JoinAttractionRequest>(
-    `/tasks/attractions/${taskId}/join`,
+    `/api/tasks/$\{taskId}/join`,
     request
   )
 
@@ -106,7 +106,7 @@ export async function joinAttraction(
  * const featured = await getFeaturedAttractions()
  */
 export async function getFeaturedAttractions(): Promise<GetAttractionDetailResponse[]> {
-  const response = await api.get<never>('/tasks/attractions/featured')
+  const response = await api.get<never>('/api/tasks/attractions/featured')
 
   return extractData<GetAttractionDetailResponse[]>(response)
 }
@@ -120,7 +120,7 @@ export async function getFeaturedAttractions(): Promise<GetAttractionDetailRespo
  * const active = await getActiveAttractions()
  */
 export async function getActiveAttractions(): Promise<GetAttractionDetailResponse[]> {
-  const response = await api.get<never>('/tasks/attractions?status=active')
+  const response = await api.get<never>('/api/tasks/attractions?status=active')
 
   return extractData<GetAttractionDetailResponse[]>(response)
 }
@@ -134,7 +134,7 @@ export async function getActiveAttractions(): Promise<GetAttractionDetailRespons
  * const upcoming = await getUpcomingAttractions()
  */
 export async function getUpcomingAttractions(): Promise<GetAttractionDetailResponse[]> {
-  const response = await api.get<never>('/tasks/attractions?status=upcoming')
+  const response = await api.get<never>('/api/tasks/attractions?status=upcoming')
 
   return extractData<GetAttractionDetailResponse[]>(response)
 }
@@ -150,7 +150,7 @@ export async function getUpcomingAttractions(): Promise<GetAttractionDetailRespo
  */
 export async function searchAttractions(keyword: string): Promise<GetAttractionDetailResponse[]> {
   const response = await api.get<never>(
-    `/tasks/attractions/search?q=${encodeURIComponent(keyword)}`
+    `/api/tasks/attractions/search?q=$\{encodeURIComponent(keyword)}`
   )
 
   return extractData<GetAttractionDetailResponse[]>(response)

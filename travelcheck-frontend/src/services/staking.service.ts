@@ -28,7 +28,7 @@ import api, { extractData } from './api'
  * })
  */
 export async function createStake(request: CreateStakeRequest): Promise<CreateStakeResponse> {
-  const response = await api.post<never, never, CreateStakeRequest>('/stakes', request)
+  const response = await api.post<never, never, CreateStakeRequest>('/api/staking/daily', request)
 
   return extractData<CreateStakeResponse>(response)
 }
@@ -43,7 +43,7 @@ export async function createStake(request: CreateStakeRequest): Promise<CreateSt
  * console.log('User stakes:', stakes)
  */
 export async function getStakes(): Promise<GetStakesResponse> {
-  const response = await api.get<never>('/stakes')
+  const response = await api.get<never>('/api/staking/my')
 
   return extractData<GetStakesResponse>(response)
 }
@@ -58,7 +58,7 @@ export async function getStakes(): Promise<GetStakesResponse> {
  * const stake = await getStakeById('stake-123')
  */
 export async function getStakeById(stakeId: string): Promise<Stake> {
-  const response = await api.get<never>(`/stakes/${stakeId}`)
+  const response = await api.get<never>(`/api/staking/${stakeId}`)
 
   return extractData<Stake>(response)
 }
@@ -81,8 +81,8 @@ export async function switchMilestone(
     milestone,
   }
 
-  const response = await api.patch<never, never, SwitchMilestoneRequest>(
-    `/stakes/${stakeId}/milestone`,
+  const response = await api.put<never, never, SwitchMilestoneRequest>(
+    `/api/staking/${stakeId}/milestone`,
     request
   )
 
@@ -100,7 +100,7 @@ export async function switchMilestone(
  * console.log('Withdrawn amount:', result.amount)
  */
 export async function withdraw(stakeId: string): Promise<WithdrawStakeResponse> {
-  const response = await api.post<never>(`/stakes/${stakeId}/withdraw`)
+  const response = await api.post<never>(`/api/staking/${stakeId}/withdraw`)
 
   return extractData<WithdrawStakeResponse>(response)
 }
@@ -114,7 +114,7 @@ export async function withdraw(stakeId: string): Promise<WithdrawStakeResponse> 
  * const activeStakes = await getActiveStakes()
  */
 export async function getActiveStakes(): Promise<Stake[]> {
-  const response = await api.get<never>('/stakes?status=active')
+  const response = await api.get<never>('/api/staking/my?status=active')
 
   return extractData<Stake[]>(response)
 }
@@ -128,7 +128,7 @@ export async function getActiveStakes(): Promise<Stake[]> {
  * const completedStakes = await getCompletedStakes()
  */
 export async function getCompletedStakes(): Promise<Stake[]> {
-  const response = await api.get<never>('/stakes?status=completed')
+  const response = await api.get<never>('/api/staking/my?status=completed')
 
   return extractData<Stake[]>(response)
 }
@@ -143,7 +143,7 @@ export async function getCompletedStakes(): Promise<Stake[]> {
  * await cancelStake('stake-123')
  */
 export async function cancelStake(stakeId: string): Promise<Stake> {
-  const response = await api.post<never>(`/stakes/${stakeId}/cancel`)
+  const response = await api.post<never>(`/api/staking/${stakeId}/cancel`)
 
   return extractData<Stake>(response)
 }
