@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "walletAddress": "0xb10f090907865d9aa32dd7d7c6893e918e330b96",
+    "nickname": null,
+    "avatar": null,
+    "totalCheckins": 0,
+    "currentStreak": 0,
+    "maxStreak": 0,
+    "lotteryChances": 0,
+    "badges": [],
+    "createdAt": "2026-01-13T14:24:28.694Z",
+    "id": "272f6c80-5b56-4ce6-ba8a-1fb00e66ccf7"
+  }
+]
