@@ -48,7 +48,7 @@ export async function getAttractions(
   }
 
   const queryString = queryParams.toString()
-  const url = queryString ? `/api/tasks/attractions?$\{queryString}` : '/api/tasks/attractions'
+  const url = queryString ? `/api/tasks/attractions?${queryString}` : '/api/tasks/attractions'
 
   const response = await api.get<never>(url)
 
@@ -66,7 +66,7 @@ export async function getAttractions(
  * console.log('Attraction:', attraction.name)
  */
 export async function getAttractionDetail(taskId: string): Promise<GetAttractionDetailResponse> {
-  const response = await api.get<never>(`/api/tasks/attractions/$\{taskId}`)
+  const response = await api.get<never>(`/api/tasks/attractions/${taskId}`)
 
   return extractData<GetAttractionDetailResponse>(response)
 }
@@ -90,7 +90,7 @@ export async function joinAttraction(
   request: JoinAttractionRequest
 ): Promise<JoinAttractionResponse> {
   const response = await api.post<never, never, JoinAttractionRequest>(
-    `/api/tasks/$\{taskId}/join`,
+    `/api/tasks/${taskId}/join`,
     request
   )
 
@@ -150,7 +150,7 @@ export async function getUpcomingAttractions(): Promise<GetAttractionDetailRespo
  */
 export async function searchAttractions(keyword: string): Promise<GetAttractionDetailResponse[]> {
   const response = await api.get<never>(
-    `/api/tasks/attractions/search?q=$\{encodeURIComponent(keyword)}`
+    `/api/tasks/attractions/search?q=${encodeURIComponent(keyword)}`
   )
 
   return extractData<GetAttractionDetailResponse[]>(response)
