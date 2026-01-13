@@ -1,6 +1,6 @@
 /**
- * @file Authentication Service
- * @description Handle wallet authentication and session management
+ * @file 认证服务
+ * @description 处理钱包认证和会话管理
  */
 
 import { UnauthorizedError } from '@/middlewares/error.middleware'
@@ -10,18 +10,18 @@ import { generateNonce, verifySignature } from '@/utils/crypto'
 import { generateToken } from '@/utils/jwt'
 
 /**
- * Store for nonces (in production, use Redis or similar)
+ * Nonce存储 (生产环境建议使用Redis等缓存)
  */
 const nonceStore = new Map<string, string>()
 
 /**
- * Generate nonce for wallet address
+ * 为钱包地址生成nonce
  */
 export function generateNonceForAddress(address: string): string {
   const nonce = generateNonce()
   nonceStore.set(address.toLowerCase(), nonce)
 
-  // Auto-delete after 5 minutes
+  // 5分钟后自动删除
   setTimeout(
     () => {
       nonceStore.delete(address.toLowerCase())
@@ -33,34 +33,34 @@ export function generateNonceForAddress(address: string): string {
 }
 
 /**
- * Verify wallet signature and create session
+ * 验证钱包签名并创建会话
  */
 export async function verifyWalletSignature(
   address: string,
   signature: string,
   nonce: string
 ): Promise<{ token: string; user: User }> {
-  // Get stored nonce
+  // 获取存储的nonce
   const storedNonce = nonceStore.get(address.toLowerCase())
 
   if (!storedNonce || storedNonce !== nonce) {
     throw new UnauthorizedError('Invalid or expired nonce')
   }
 
-  // Construct message that was signed
+  // 构建被签名的消息
   const message = `Sign this message to authenticate with TravelCheck.\n\nNonce: ${nonce}`
 
-  // Verify signature
+  // 验证签名
   const isValid = verifySignature(message, signature, address)
 
   if (!isValid) {
     throw new UnauthorizedError('Invalid signature')
   }
 
-  // Delete used nonce
+  // 删除已使用的nonce
   nonceStore.delete(address.toLowerCase())
 
-  // Get or create user
+  // 获取或创建用户
   let user = await userRepository.findByWalletAddress(address)
 
   if (!user) {
@@ -77,7 +77,7 @@ export async function verifyWalletSignature(
     })
   }
 
-  // Generate JWT token
+  // 生成JWT token
   const token = generateToken({
     userId: user.id,
     walletAddress: user.walletAddress,
@@ -90,14 +90,14 @@ export async function verifyWalletSignature(
 }
 
 /**
- * Get user by ID
+ * 通过ID获取用户
  */
 export async function getUserById(userId: string): Promise<User | null> {
   return await userRepository.findById(userId)
 }
 
 /**
- * Update user profile
+ * 更新用户资料
  */
 export async function updateUserProfile(
   userId: string,
