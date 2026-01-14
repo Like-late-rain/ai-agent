@@ -9,11 +9,13 @@ import { Badge } from '@/components/common/Badge'
 import { Card } from '@/components/common/Card'
 import type { LotteryPrize, Reward } from '@/types/models.types'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * RewardsPage Component
  */
 export function RewardsPage() {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState<'redpackets' | 'lottery' | 'badges'>('redpackets')
   const [lotteryChances] = useState(3)
 
@@ -47,10 +49,10 @@ export function RewardsPage() {
 
   // Mock badges
   const badges = [
-    { id: '1', name: 'First Check-in', icon: '🎯', earned: true },
-    { id: '2', name: '7-Day Streak', icon: '🔥', earned: true },
-    { id: '3', name: '30-Day Streak', icon: '⭐', earned: false },
-    { id: '4', name: 'Perfect Month', icon: '💯', earned: false },
+    { id: '1', name: t('rewardsPage.badges.firstCheckin'), icon: '🎯', earned: true },
+    { id: '2', name: t('rewardsPage.badges.sevenDayStreak'), icon: '🔥', earned: true },
+    { id: '3', name: t('rewardsPage.badges.thirtyDayStreak'), icon: '⭐', earned: false },
+    { id: '4', name: t('rewardsPage.badges.perfectMonth'), icon: '💯', earned: false },
   ]
 
   const handleSpin = async (): Promise<LotteryPrize> => {
@@ -71,39 +73,39 @@ export function RewardsPage() {
   }
 
   const handleClaimRedPacket = (reward: Reward) => {
-    alert(`Claimed ${reward.amount} TCK!`)
+    alert(t('rewardsPage.alerts.claimed', { amount: reward.amount }))
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2">Rewards</h1>
-        <p className="text-text-muted">View and claim your earned rewards</p>
+        <h1 className="text-3xl font-bold text-white mb-2">{t('rewardsPage.title')}</h1>
+        <p className="text-text-muted">{t('rewardsPage.subtitle')}</p>
       </div>
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <Card.Body>
-            <p className="text-sm text-text-muted mb-1">Total Earned</p>
+            <p className="text-sm text-text-muted mb-1">{t('rewardsPage.stats.totalEarned')}</p>
             <p className="text-2xl font-bold text-primary">125.5 TCK</p>
           </Card.Body>
         </Card>
         <Card>
           <Card.Body>
-            <p className="text-sm text-text-muted mb-1">Unclaimed</p>
+            <p className="text-sm text-text-muted mb-1">{t('rewardsPage.stats.unclaimed')}</p>
             <p className="text-2xl font-bold text-white">8.7 TCK</p>
           </Card.Body>
         </Card>
         <Card>
           <Card.Body>
-            <p className="text-sm text-text-muted mb-1">Lottery Chances</p>
+            <p className="text-sm text-text-muted mb-1">{t('rewardsPage.stats.lotteryChances')}</p>
             <p className="text-2xl font-bold text-primary">{lotteryChances}</p>
           </Card.Body>
         </Card>
         <Card>
           <Card.Body>
-            <p className="text-sm text-text-muted mb-1">Badges Earned</p>
+            <p className="text-sm text-text-muted mb-1">{t('rewardsPage.stats.badgesEarned')}</p>
             <p className="text-2xl font-bold text-white">
               {badges.filter((b) => b.earned).length} / {badges.length}
             </p>
@@ -116,9 +118,9 @@ export function RewardsPage() {
         <Card.Body>
           <div className="flex gap-2 overflow-x-auto">
             {[
-              { value: 'redpackets', label: 'Red Packets', icon: '🧧' },
-              { value: 'lottery', label: 'Lottery', icon: '🎰' },
-              { value: 'badges', label: 'Badges', icon: '🏆' },
+              { value: 'redpackets', label: t('rewardsPage.tabs.redPackets'), icon: '🧧' },
+              { value: 'lottery', label: t('rewardsPage.tabs.lottery'), icon: '🎰' },
+              { value: 'badges', label: t('rewardsPage.tabs.badges'), icon: '🏆' },
             ].map((tab) => (
               <button
                 key={tab.value}
@@ -164,9 +166,9 @@ export function RewardsPage() {
                   <div className="text-6xl mb-3">{badge.icon}</div>
                   <h3 className="font-semibold text-white mb-1">{badge.name}</h3>
                   {badge.earned ? (
-                    <Badge variant="success">Earned</Badge>
+                    <Badge variant="success">{t('rewardsPage.badges.earned')}</Badge>
                   ) : (
-                    <Badge variant="default">Locked</Badge>
+                    <Badge variant="default">{t('rewardsPage.badges.locked')}</Badge>
                   )}
                 </div>
               </Card.Body>
@@ -178,7 +180,7 @@ export function RewardsPage() {
       {/* Reward History */}
       <Card>
         <Card.Header>
-          <h2 className="text-xl font-semibold text-white">Recent Rewards</h2>
+          <h2 className="text-xl font-semibold text-white">{t('rewardsPage.recent.title')}</h2>
         </Card.Header>
         <Card.Body>
           <div className="space-y-3">
@@ -190,14 +192,16 @@ export function RewardsPage() {
                 <div className="flex items-center gap-3">
                   <div className="text-2xl">🎁</div>
                   <div>
-                    <p className="font-medium text-white">Daily Red Packet</p>
-                    <p className="text-xs text-text-muted">{i} days ago</p>
+                    <p className="font-medium text-white">{t('rewardsPage.recent.dailyRedPacket')}</p>
+                    <p className="text-xs text-text-muted">
+                      {t('rewardsPage.recent.daysAgo', { count: i })}
+                    </p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="font-bold text-primary">+5.5 TCK</p>
                   <Badge variant="success" size="sm">
-                    Claimed
+                    {t('rewardsPage.recent.claimed')}
                   </Badge>
                 </div>
               </div>

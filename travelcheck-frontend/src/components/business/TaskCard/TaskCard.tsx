@@ -10,6 +10,7 @@ import type { AttractionTask } from '@/types/models.types'
 import { formatAmount } from '@/utils/format'
 import { clsx } from 'clsx'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * TaskCard component props
@@ -35,6 +36,7 @@ export interface TaskCardProps {
  * />
  */
 export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardProps) {
+  const { t } = useTranslation()
   /**
    * Get difficulty badge variant
    */
@@ -75,24 +77,33 @@ export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardPro
   const statusLabel = useMemo(() => {
     switch (task.status) {
       case 'upcoming':
-        return 'Upcoming'
+        return t('taskCard.status.upcoming')
       case 'active':
-        return 'Active'
+        return t('taskCard.status.active')
       case 'expiring':
-        return 'Expiring Soon'
+        return t('taskCard.status.expiring')
       case 'completed':
-        return 'Completed'
+        return t('taskCard.status.completed')
       default:
         return task.status
     }
-  }, [task.status])
+  }, [task.status, t])
 
   /**
    * Format difficulty
    */
   const difficultyLabel = useMemo(() => {
-    return task.difficulty.charAt(0).toUpperCase() + task.difficulty.slice(1)
-  }, [task.difficulty])
+    switch (task.difficulty) {
+      case 'easy':
+        return t('taskCard.difficulty.easy')
+      case 'medium':
+        return t('taskCard.difficulty.medium')
+      case 'hard':
+        return t('taskCard.difficulty.hard')
+      default:
+        return task.difficulty
+    }
+  }, [task.difficulty, t])
 
   /**
    * Check if can join
@@ -130,7 +141,10 @@ export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardPro
         {task.status !== 'completed' && (
           <div className="absolute bottom-4 right-4 bg-background-dark/80 px-3 py-1 rounded-lg">
             <span className="text-sm text-white font-medium">
-              {daysRemaining} {daysRemaining === 1 ? 'day' : 'days'} left
+              {t('taskCard.daysLeft', {
+                count: daysRemaining,
+                unit: daysRemaining === 1 ? t('common.day') : t('common.days'),
+              })}
             </span>
           </div>
         )}
@@ -160,21 +174,21 @@ export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardPro
         {/* Task details grid */}
         <div className="grid grid-cols-2 gap-4 p-3 bg-background-dark rounded-lg">
           <div>
-            <p className="text-xs text-text-muted mb-1">Duration</p>
+            <p className="text-xs text-text-muted mb-1">{t('taskCard.duration')}</p>
             <p className="text-sm font-semibold text-white">
-              {task.duration} {task.duration === 1 ? 'day' : 'days'}
+              {task.duration} {task.duration === 1 ? t('common.day') : t('common.days')}
             </p>
           </div>
           <div>
-            <p className="text-xs text-text-muted mb-1">Reward APY</p>
+            <p className="text-xs text-text-muted mb-1">{t('taskCard.rewardApy')}</p>
             <p className="text-sm font-semibold text-primary">{task.rewardApy}%</p>
           </div>
           <div>
-            <p className="text-xs text-text-muted mb-1">Min Stake</p>
+            <p className="text-xs text-text-muted mb-1">{t('taskCard.minStake')}</p>
             <p className="text-sm font-semibold text-white">{formatAmount(task.minStake)} TCK</p>
           </div>
           <div>
-            <p className="text-xs text-text-muted mb-1">Difficulty</p>
+            <p className="text-xs text-text-muted mb-1">{t('taskCard.difficultyLabel')}</p>
             <p className="text-sm font-semibold text-white">{difficultyLabel}</p>
           </div>
         </div>
@@ -182,11 +196,11 @@ export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardPro
         {/* Dates */}
         <div className="mt-4 space-y-1 text-xs text-text-muted">
           <div className="flex justify-between">
-            <span>Start Date:</span>
+            <span>{t('taskCard.startDate')}:</span>
             <span>{new Date(task.startDate).toLocaleDateString()}</span>
           </div>
           <div className="flex justify-between">
-            <span>End Date:</span>
+            <span>{t('taskCard.endDate')}:</span>
             <span>{new Date(task.endDate).toLocaleDateString()}</span>
           </div>
         </div>
@@ -197,7 +211,7 @@ export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardPro
           {/* Join button */}
           {canJoin && onJoin && (
             <Button variant="primary" size="md" fullWidth onClick={() => onJoin(task)}>
-              Join Task
+              {t('taskCard.joinTask')}
             </Button>
           )}
 
@@ -209,7 +223,7 @@ export function TaskCard({ task, className, onJoin, onViewDetails }: TaskCardPro
               fullWidth
               onClick={() => onViewDetails(task)}
             >
-              View Details
+              {t('taskCard.viewDetails')}
             </Button>
           )}
         </div>

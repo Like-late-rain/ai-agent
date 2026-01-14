@@ -82,3 +82,37 @@ export function logout(): void {
   // The actual clearing is handled by clearUserAtom in user.atom.ts
   // This function is here for API consistency
 }
+
+/**
+ * Get current user info
+ *
+ * @returns Promise resolving to user data
+ *
+ * @example
+ * const user = await getCurrentUser()
+ * console.log('User:', user)
+ */
+export async function getCurrentUser() {
+  const response = await api.get('/api/auth/me')
+  const data = extractData(response)
+  return data
+}
+
+/**
+ * Update user profile
+ *
+ * @param profileData - Profile data to update
+ * @returns Promise resolving to updated user data
+ *
+ * @example
+ * const user = await updateUserProfile({ nickname: 'New Name', avatar: 'url' })
+ */
+export async function updateUserProfile(profileData: { nickname?: string; avatar?: string }) {
+  const response = await api.put('/api/auth/me', profileData)
+  const data = extractData(response)
+  
+  // Update user in localStorage
+  setItem(STORAGE_KEYS.USER, data)
+  
+  return data
+}

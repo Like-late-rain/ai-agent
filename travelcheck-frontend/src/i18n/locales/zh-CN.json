@@ -12,8 +12,10 @@
     "edit": "编辑",
     "back": "返回",
     "next": "下一步",
+    "day": "天",
     "days": "天",
-    "all": "全部"
+    "all": "全部",
+    "connecting": "连接中..."
   },
   "nav": {
     "home": "首页",
@@ -27,6 +29,8 @@
     "title": "探索世界，上链。",
     "subtitle": "质押代币，在目的地打卡，并获得真实奖励。今天就加入去中心化的旅行社区。",
     "liveOnMainnet": "主网上线",
+    "newTasksAvailable": "有新任务可用",
+    "travelers": "旅行者",
     "dailyTaskCheckin": {
       "title": "每日任务打卡",
       "description": "保持你的连续打卡。质押10TCK开始每日赚取倍数。",
@@ -101,9 +105,85 @@
     "title": "我的奖励",
     "subtitle": "查看你的奖励和福利"
   },
+  "rewardsPage": {
+    "title": "奖励",
+    "subtitle": "查看并领取你的奖励",
+    "alerts": {
+      "claimed": "已领取 {{amount}} TCK！"
+    },
+    "stats": {
+      "totalEarned": "累计收益",
+      "unclaimed": "未领取",
+      "lotteryChances": "抽奖次数",
+      "badgesEarned": "已获得徽章"
+    },
+    "tabs": {
+      "redPackets": "红包",
+      "lottery": "抽奖",
+      "badges": "徽章"
+    },
+    "badges": {
+      "firstCheckin": "首次打卡",
+      "sevenDayStreak": "七日连签",
+      "thirtyDayStreak": "三十日连签",
+      "perfectMonth": "完美月份",
+      "earned": "已获得",
+      "locked": "未解锁"
+    },
+    "recent": {
+      "title": "最近奖励",
+      "dailyRedPacket": "每日红包",
+      "daysAgo": "{{count}} 天前",
+      "claimed": "已领取"
+    }
+  },
   "attractions": {
     "title": "景点",
     "subtitle": "探索令人惊叹的地点"
+  },
+  "attractionsPage": {
+    "title": "景点任务",
+    "subtitle": "探索精彩目的地并获取奖励",
+    "alerts": {
+      "joining": "参与任务：{{name}}",
+      "viewing": "查看详情：{{name}}"
+    },
+    "filters": {
+      "all": "全部任务",
+      "active": "进行中",
+      "upcoming": "即将开始",
+      "expiring": "即将结束"
+    },
+    "stats": {
+      "availableTasks": "可用任务",
+      "totalRewards": "总奖励",
+      "avgApy": "平均年化收益"
+    },
+    "empty": {
+      "title": "暂无任务",
+      "description": "请尝试选择其他筛选条件，或稍后查看新景点任务",
+      "cta": "查看全部任务"
+    },
+    "tasks": {
+      "greatWall": {
+        "name": "长城挑战",
+        "description": "前往壮丽的中国长城并完成打卡",
+        "locationName": "中国长城",
+        "locationAddress": "中国北京市怀柔区"
+      },
+      "cherryBlossom": {
+        "name": "樱花巡礼",
+        "description": "春季体验日本樱花之美",
+        "locationName": "新宿御苑",
+        "locationAddress": "日本东京都新宿区内藤町 11 号"
+      },
+      "alpineAdventure": {
+        "name": "阿尔卑斯探险",
+        "description": "探索迷人的瑞士阿尔卑斯山与山村",
+        "locationName": "马特洪峰",
+        "locationAddress": "瑞士瓦莱州采尔马特 3920"
+      }
+    }
   },
   "checkins": {
     "title": "我的打卡",
@@ -115,6 +195,52 @@
     "viewDetails": "查看详情",
     "noActiveStakes": "暂无活跃质押",
     "createFirstStake": "创建你的第一个质押开始打卡之旅"
+  },
+  "checkinPage": {
+    "title": "每日打卡",
+    "subtitle": "分享你的旅行瞬间",
+    "formTitle": "打卡表单",
+    "shareExperienceLabel": "分享你的体验",
+    "shareExperiencePlaceholder": "说说你的今天...（至少 {{count}} 字）",
+    "contentMinHint": "至少 {{count}} 字：{{current}}",
+    "locationLabel": "位置",
+    "noLocation": "未设置位置",
+    "getLocation": "获取位置",
+    "photosLabel": "照片",
+    "uploadPrompt": "点击上传照片",
+    "photoRequirement": "至少需要一张照片",
+    "submit": "提交打卡",
+    "submitting": "提交中...",
+    "alerts": {
+      "success": "打卡成功！",
+      "locationFailed": "获取位置失败：{{message}}",
+      "geolocationUnsupported": "当前浏览器不支持定位"
+    },
+    "tips": {
+      "title": "打卡提示",
+      "item1": "分享真实的旅行体验",
+      "item2": "上传清晰的地点照片",
+      "item3": "至少写 200 字",
+      "item4": "24 小时内打卡保持连续",
+      "item5": "错过当天有 3 次补卡机会"
+    }
+  },
+  "calendarPage": {
+    "title": "打卡日历",
+    "subtitle": "查看你的打卡记录",
+    "checkInToday": "今日打卡",
+    "stats": {
+      "totalCheckins": "总打卡数",
+      "currentStreak": "当前连续",
+      "makeupChances": "补卡次数",
+      "completion": "完成率"
+    },
+    "recent": {
+      "title": "近期打卡",
+      "checkinDay": "第 {{index}} 天打卡",
+      "daysAgo": "{{count}} 天前",
+      "sampleContent": "今天探索了市中心，参观了历史街区，还品尝了当地美食..."
+    }
   },
   "achievements": {
     "title": "我的成就",
@@ -151,7 +277,235 @@
     "memberSince": "注册时间",
     "editProfile": "编辑资料",
     "changeAvatar": "更换头像",
-    "walletAddress": "钱包地址"
+    "walletAddress": "钱包地址",
+    "attractionsVisited": "已打卡景点",
+    "connectWalletPrompt": "请先连接钱包",
+    "connectWallet": "连接钱包",
+    "nicknamePlaceholder": "输入昵称",
+    "anonymous": "匿名用户",
+    "saving": "保存中...",
+    "achievementsWall": "成就墙",
+    "alerts": {
+      "nicknameRequired": "昵称不能为空",
+      "updateSuccess": "资料更新成功！",
+      "updateFailed": "更新失败，请重试",
+      "avatarPrompt": "输入新的头像 URL：",
+      "avatarUpdateSuccess": "头像更新成功！",
+      "avatarUpdateFailed": "头像更新失败，请重试"
+    }
+  },
+  "taskCard": {
+    "status": {
+      "upcoming": "即将开始",
+      "active": "进行中",
+      "expiring": "即将结束",
+      "completed": "已完成"
+    },
+    "difficulty": {
+      "easy": "简单",
+      "medium": "中等",
+      "hard": "困难"
+    },
+    "daysLeft": "还剩 {{count}}{{unit}}",
+    "duration": "任务时长",
+    "rewardApy": "年化收益",
+    "minStake": "最低质押",
+    "difficultyLabel": "难度",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "joinTask": "参与任务",
+    "viewDetails": "查看详情"
+  },
+  "stakeCard": {
+    "status": {
+      "active": "进行中",
+      "completed": "已完成",
+      "withdrawn": "已取回"
+    },
+    "type": {
+      "daily": "每日任务",
+      "attraction": "景点任务"
+    },
+    "mode": {
+      "sealed": "封闭式",
+      "anytime": "随时式"
+    },
+    "milestone": "{{count}} 天里程碑",
+    "perfect": "完美",
+    "progress": "进度",
+    "progressValue": "{{current}} / {{total}} {{unit}}",
+    "accumulatedInterest": "累计利息",
+    "totalReturn": "预计总收益",
+    "startDate": "开始日期",
+    "expectedEnd": "预计结束",
+    "checkInToday": "今日打卡",
+    "withdraw": "取回",
+    "viewDetails": "查看详情"
+  },
+  "walletConnect": {
+    "walletLabel": "钱包",
+    "copied": "已复制！",
+    "copyAddress": "复制地址"
+  },
+  "redPacket": {
+    "title": "红包",
+    "tapToOpen": "点击打开",
+    "expiresIn": "剩余时间：{{time}}",
+    "timeRemaining": "{{hours}}小时 {{minutes}}分 {{seconds}}秒",
+    "congrats": "恭喜！",
+    "claimNow": "立即领取",
+    "alreadyClaimed": "已领取",
+    "status": {
+      "claimed": "已领取",
+      "expired": "已过期",
+      "unclaimed": "未领取"
+    }
+  },
+  "lotteryWheel": {
+    "ariaLabel": "抽奖转盘",
+    "chancesRemaining": "剩余抽奖次数",
+    "spinning": "抽奖中...",
+    "spinNow": "立即抽奖！",
+    "congrats": "恭喜！",
+    "youWon": "你获得了：",
+    "claimPrize": "领取奖品"
+  },
+  "calendarGrid": {
+    "weekdays": {
+      "sun": "周日",
+      "mon": "周一",
+      "tue": "周二",
+      "wed": "周三",
+      "thu": "周四",
+      "fri": "周五",
+      "sat": "周六"
+    },
+    "legend": {
+      "checked": "已打卡",
+      "missed": "缺卡",
+      "makeup": "补卡",
+      "attraction": "景点",
+      "canMakeup": "可补卡"
+    }
+  },
+  "achievementsData": {
+    "travelSeed": {
+      "name": "旅行新芽",
+      "description": "完成第一次每日打卡",
+      "requirement": "完成 1 次每日打卡"
+    },
+    "sevenDays": {
+      "name": "坚持七天",
+      "description": "连续打卡 7 天",
+      "requirement": "连续打卡 7 天"
+    },
+    "thirtyDays": {
+      "name": "旅行达人",
+      "description": "完成 30 天里程碑",
+      "requirement": "完成 30 天里程碑"
+    },
+    "explorer": {
+      "name": "探险家",
+      "description": "完成 100 天里程碑",
+      "requirement": "完成 100 天里程碑"
+    },
+    "master": {
+      "name": "旅行大师",
+      "description": "完成 365 天里程碑",
+      "requirement": "完成 365 天里程碑"
+    },
+    "collector": {
+      "name": "景点收集者",
+      "description": "打卡 5 个不同景点",
+      "requirement": "打卡 5 个不同景点"
+    },
+    "worldTour": {
+      "name": "环游世界",
+      "description": "打卡 20 个不同景点",
+      "requirement": "打卡 20 个不同景点"
+    },
+    "wealth": {
+      "name": "财富积累",
+      "description": "累计收益达到 1000 代币",
+      "requirement": "累计收益达到 1000 代币"
+    },
+    "luckyStar": {
+      "name": "幸运之星",
+      "description": "抽奖获得 10 次大奖",
+      "requirement": "抽奖获得 10 次大奖"
+    },
+    "perfectionist": {
+      "name": "完美主义",
+      "description": "连续 30 天无断卡",
+      "requirement": "连续 30 天无断卡"
+    },
+    "communityStar": {
+      "name": "社区之星",
+      "description": "邀请 10 位好友加入",
+      "requirement": "邀请 10 位好友加入"
+    },
+    "legendaryTraveler": {
+      "name": "传奇旅者",
+      "description": "获得所有其他徽章",
+      "requirement": "获得所有其他徽章"
+    }
+  },
+  "achievementsPage": {
+    "stats": {
+      "unlocked": "已解锁成就",
+      "progress": "完成度"
+    },
+    "filters": {
+      "all": "全部",
+      "unlocked": "已解锁",
+      "locked": "未解锁",
+      "rarity": "稀有度："
+    },
+    "rarity": {
+      "all": "全部",
+      "common": "普通",
+      "rare": "稀有",
+      "epic": "史诗",
+      "legendary": "传说"
+    },
+    "empty": "没有找到符合条件的成就",
+    "howToEarn": {
+      "title": "如何获得成就",
+      "daily": {
+        "title": "每日打卡",
+        "item1": "坚持每天完成打卡任务",
+        "item2": "达成不同天数的里程碑",
+        "item3": "保持连续打卡记录"
+      },
+      "attraction": {
+        "title": "景点打卡",
+        "item1": "参与景点打卡任务",
+        "item2": "探索更多不同的景点",
+        "item3": "完成高难度任务"
+      },
+      "earnings": {
+        "title": "收益累积",
+        "item1": "通过打卡赚取代币",
+        "item2": "质押获得利息收益",
+        "item3": "参与幸运转盘抽奖"
+      },
+      "community": {
+        "title": "社区互动",
+        "item1": "邀请好友加入平台",
+        "item2": "分享旅行攻略",
+        "item3": "帮助新用户成长"
+      }
+    }
+  },
+  "achievementBadge": {
+    "rarity": {
+      "common": "普通",
+      "rare": "稀有",
+      "epic": "史诗",
+      "legendary": "传说"
+    },
+    "unlocked": "已解锁",
+    "unlockedAt": "解锁于 {{date}}"
   },
   "footer": {
     "copyright": "© 2024 TravelCheck. 保留所有权利。",

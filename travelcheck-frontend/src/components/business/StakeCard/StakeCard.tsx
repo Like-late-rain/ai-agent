@@ -10,6 +10,7 @@ import type { Stake } from '@/types/models.types'
 import { formatAmount } from '@/utils/format'
 import { clsx } from 'clsx'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * StakeCard component props
@@ -44,6 +45,7 @@ export function StakeCard({
   onWithdraw,
   onViewDetails,
 }: StakeCardProps) {
+  const { t } = useTranslation()
   /**
    * Calculate progress percentage
    */
@@ -73,32 +75,32 @@ export function StakeCard({
   const statusLabel = useMemo(() => {
     switch (stake.status) {
       case 'active':
-        return 'Active'
+        return t('stakeCard.status.active')
       case 'completed':
-        return 'Completed'
+        return t('stakeCard.status.completed')
       case 'withdrawn':
-        return 'Withdrawn'
+        return t('stakeCard.status.withdrawn')
       default:
         return stake.status
     }
-  }, [stake.status])
+  }, [stake.status, t])
 
   /**
    * Get type badge variant and label
    */
   const typeInfo = useMemo(() => {
     if (stake.type === 'daily') {
-      return { variant: 'primary' as const, label: 'Daily Task' }
+      return { variant: 'primary' as const, label: t('stakeCard.type.daily') }
     }
-    return { variant: 'warning' as const, label: 'Attraction Task' }
-  }, [stake.type])
+    return { variant: 'warning' as const, label: t('stakeCard.type.attraction') }
+  }, [stake.type, t])
 
   /**
    * Get mode label
    */
   const modeLabel = useMemo(() => {
-    return stake.mode === 'sealed' ? 'Sealed' : 'Anytime'
-  }, [stake.mode])
+    return stake.mode === 'sealed' ? t('stakeCard.mode.sealed') : t('stakeCard.mode.anytime')
+  }, [stake.mode, t])
 
   /**
    * Check if can checkin today
@@ -126,7 +128,9 @@ export function StakeCard({
               <Badge variant="outline">{modeLabel}</Badge>
             </div>
             <h3 className="text-lg font-semibold text-white">{formatAmount(stake.amount)} TCK</h3>
-            <p className="text-sm text-text-muted">{stake.milestone} Days Milestone</p>
+            <p className="text-sm text-text-muted">
+              {t('stakeCard.milestone', { count: stake.milestone })}
+            </p>
           </div>
 
           {/* Perfect indicator */}
@@ -139,7 +143,7 @@ export function StakeCard({
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="text-xs font-medium">Perfect</span>
+              <span className="text-xs font-medium">{t('stakeCard.perfect')}</span>
             </div>
           )}
         </div>
@@ -149,9 +153,13 @@ export function StakeCard({
         {/* Progress bar */}
         <div className="mb-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-text-muted">Progress</span>
+            <span className="text-sm text-text-muted">{t('stakeCard.progress')}</span>
             <span className="text-sm font-medium text-white">
-              {stake.checkedDays} / {stake.milestone} days
+              {t('stakeCard.progressValue', {
+                current: stake.checkedDays,
+                total: stake.milestone,
+                unit: t('common.days'),
+              })}
             </span>
           </div>
           <div className="w-full h-2 bg-background-dark rounded-full overflow-hidden">
@@ -169,13 +177,13 @@ export function StakeCard({
         {/* Interest information */}
         <div className="grid grid-cols-2 gap-4 p-3 bg-background-dark rounded-lg">
           <div>
-            <p className="text-xs text-text-muted mb-1">Accumulated Interest</p>
+            <p className="text-xs text-text-muted mb-1">{t('stakeCard.accumulatedInterest')}</p>
             <p className="text-sm font-semibold text-primary">
               {formatAmount(stake.accumulatedInterest)} TCK
             </p>
           </div>
           <div>
-            <p className="text-xs text-text-muted mb-1">Total Return</p>
+            <p className="text-xs text-text-muted mb-1">{t('stakeCard.totalReturn')}</p>
             <p className="text-sm font-semibold text-white">
               {formatAmount(stake.amount + stake.accumulatedInterest)} TCK
             </p>
@@ -185,11 +193,11 @@ export function StakeCard({
         {/* Dates */}
         <div className="mt-4 space-y-1 text-xs text-text-muted">
           <div className="flex justify-between">
-            <span>Start Date:</span>
+            <span>{t('stakeCard.startDate')}:</span>
             <span>{new Date(stake.startDate).toLocaleDateString()}</span>
           </div>
           <div className="flex justify-between">
-            <span>Expected End:</span>
+            <span>{t('stakeCard.expectedEnd')}:</span>
             <span>{new Date(stake.endDate).toLocaleDateString()}</span>
           </div>
         </div>
@@ -200,21 +208,21 @@ export function StakeCard({
           {/* Checkin button */}
           {canCheckinToday && onCheckin && (
             <Button variant="primary" size="sm" fullWidth onClick={() => onCheckin(stake)}>
-              Check In Today
+              {t('stakeCard.checkInToday')}
             </Button>
           )}
 
           {/* Withdraw button */}
           {canWithdraw && onWithdraw && (
             <Button variant="outline" size="sm" fullWidth onClick={() => onWithdraw(stake)}>
-              Withdraw
+              {t('stakeCard.withdraw')}
             </Button>
           )}
 
           {/* View details button */}
           {onViewDetails && (
             <Button variant="ghost" size="sm" fullWidth onClick={() => onViewDetails(stake)}>
-              View Details
+              {t('stakeCard.viewDetails')}
             </Button>
           )}
         </div>

@@ -7,6 +7,7 @@ import { Button } from '@/components/common/Button'
 import { useWallet } from '@/hooks/useWallet'
 import { clsx } from 'clsx'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * WalletConnect component props
@@ -28,6 +29,7 @@ export interface WalletConnectProps {
  * <WalletConnect showBalance />
  */
 export function WalletConnect({ className, showBalance = true }: WalletConnectProps) {
+  const { t } = useTranslation()
   const {
     address,
     formattedAddress,
@@ -110,7 +112,7 @@ export function WalletConnect({ className, showBalance = true }: WalletConnectPr
         disabled={isConnecting}
         className={className}
       >
-        {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+        {isConnecting ? t('common.connecting') : t('common.connectWallet')}
       </Button>
     )
   }
@@ -136,7 +138,7 @@ export function WalletConnect({ className, showBalance = true }: WalletConnectPr
             viewBox="0 0 24 24"
             stroke="currentColor"
             role="img"
-            aria-label="Wallet"
+            aria-label={t('walletConnect.walletLabel')}
           >
             <path
               strokeLinecap="round"
@@ -205,7 +207,9 @@ export function WalletConnect({ className, showBalance = true }: WalletConnectPr
                 d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
               />
             </svg>
-            <span className="text-white">{copySuccess ? 'Copied!' : 'Copy Address'}</span>
+            <span className="text-white">
+              {copySuccess ? t('walletConnect.copied') : t('walletConnect.copyAddress')}
+            </span>
           </button>
 
           {/* Disconnect option */}
@@ -234,7 +238,7 @@ export function WalletConnect({ className, showBalance = true }: WalletConnectPr
                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
               />
             </svg>
-            <span>Disconnect</span>
+            <span>{t('common.disconnect')}</span>
           </button>
         </div>
       )}

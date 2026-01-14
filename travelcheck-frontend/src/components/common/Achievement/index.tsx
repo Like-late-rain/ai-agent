@@ -1,149 +1,154 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AchievementBadge, { Achievement } from "./achievement-badge";
-
-// 模拟成就数据
-const ACHIEVEMENTS: Achievement[] = [
-  {
-    id: "1",
-    name: "旅行新芽",
-    description: "完成第一次每日打卡",
-    icon: "🌱",
-    requirement: "完成1次每日打卡",
-    rarity: "common",
-    unlocked: true,
-    unlockedAt: "2026-01-01"
-  },
-  {
-    id: "2",
-    name: "坚持七天",
-    description: "连续打卡7天",
-    icon: "📅",
-    requirement: "连续打卡7天",
-    rarity: "common",
-    unlocked: true,
-    unlockedAt: "2026-01-07"
-  },
-  {
-    id: "3",
-    name: "旅行达人",
-    description: "完成30天里程碑",
-    icon: "⭐",
-    requirement: "完成30天里程碑",
-    rarity: "rare",
-    unlocked: true,
-    unlockedAt: "2026-01-20"
-  },
-  {
-    id: "4",
-    name: "探险家",
-    description: "完成100天里程碑",
-    icon: "🌟",
-    requirement: "完成100天里程碑",
-    rarity: "epic",
-    unlocked: false,
-    progress: 45,
-    maxProgress: 100
-  },
-  {
-    id: "5",
-    name: "旅行大师",
-    description: "完成365天里程碑",
-    icon: "👑",
-    requirement: "完成365天里程碑",
-    rarity: "legendary",
-    unlocked: false,
-    progress: 15,
-    maxProgress: 365
-  },
-  {
-    id: "6",
-    name: "景点收集者",
-    description: "打卡5个不同景点",
-    icon: "📍",
-    requirement: "打卡5个不同景点",
-    rarity: "rare",
-    unlocked: false,
-    progress: 2,
-    maxProgress: 5
-  },
-  {
-    id: "7",
-    name: "环游世界",
-    description: "打卡20个不同景点",
-    icon: "🌍",
-    requirement: "打卡20个不同景点",
-    rarity: "epic",
-    unlocked: false,
-    progress: 2,
-    maxProgress: 20
-  },
-  {
-    id: "8",
-    name: "财富积累",
-    description: "累计收益达到1000代币",
-    icon: "💰",
-    requirement: "累计收益达到1000代币",
-    rarity: "rare",
-    unlocked: false,
-    progress: 356,
-    maxProgress: 1000
-  },
-  {
-    id: "9",
-    name: "幸运之星",
-    description: "抽奖获得10次大奖",
-    icon: "🎰",
-    requirement: "抽奖获得10次大奖",
-    rarity: "epic",
-    unlocked: false,
-    progress: 3,
-    maxProgress: 10
-  },
-  {
-    id: "10",
-    name: "完美主义",
-    description: "连续30天无断卡",
-    icon: "💯",
-    requirement: "连续30天无断卡",
-    rarity: "epic",
-    unlocked: false,
-    progress: 7,
-    maxProgress: 30
-  },
-  {
-    id: "11",
-    name: "社区之星",
-    description: "邀请10位好友加入",
-    icon: "🌟",
-    requirement: "邀请10位好友加入",
-    rarity: "rare",
-    unlocked: false,
-    progress: 0,
-    maxProgress: 10
-  },
-  {
-    id: "12",
-    name: "传奇旅者",
-    description: "获得所有其他徽章",
-    icon: "🏆",
-    requirement: "获得所有其他徽章",
-    rarity: "legendary",
-    unlocked: false,
-    progress: 3,
-    maxProgress: 11
-  }
-];
 
 type FilterType = "all" | "unlocked" | "locked";
 type RarityFilter = "all" | "common" | "rare" | "epic" | "legendary";
 
 export default function AchievementsPage() {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<FilterType>("all");
   const [rarityFilter, setRarityFilter] = useState<RarityFilter>("all");
 
-  const filteredAchievements = ACHIEVEMENTS.filter((achievement) => {
+  // 模拟成就数据
+  const achievements = useMemo<Achievement[]>(
+    () => [
+      {
+        id: "1",
+        name: t("achievementsData.travelSeed.name"),
+        description: t("achievementsData.travelSeed.description"),
+        icon: "🌱",
+        requirement: t("achievementsData.travelSeed.requirement"),
+        rarity: "common",
+        unlocked: true,
+        unlockedAt: "2026-01-01"
+      },
+      {
+        id: "2",
+        name: t("achievementsData.sevenDays.name"),
+        description: t("achievementsData.sevenDays.description"),
+        icon: "📅",
+        requirement: t("achievementsData.sevenDays.requirement"),
+        rarity: "common",
+        unlocked: true,
+        unlockedAt: "2026-01-07"
+      },
+      {
+        id: "3",
+        name: t("achievementsData.thirtyDays.name"),
+        description: t("achievementsData.thirtyDays.description"),
+        icon: "⭐",
+        requirement: t("achievementsData.thirtyDays.requirement"),
+        rarity: "rare",
+        unlocked: true,
+        unlockedAt: "2026-01-20"
+      },
+      {
+        id: "4",
+        name: t("achievementsData.explorer.name"),
+        description: t("achievementsData.explorer.description"),
+        icon: "🌟",
+        requirement: t("achievementsData.explorer.requirement"),
+        rarity: "epic",
+        unlocked: false,
+        progress: 45,
+        maxProgress: 100
+      },
+      {
+        id: "5",
+        name: t("achievementsData.master.name"),
+        description: t("achievementsData.master.description"),
+        icon: "👑",
+        requirement: t("achievementsData.master.requirement"),
+        rarity: "legendary",
+        unlocked: false,
+        progress: 15,
+        maxProgress: 365
+      },
+      {
+        id: "6",
+        name: t("achievementsData.collector.name"),
+        description: t("achievementsData.collector.description"),
+        icon: "📍",
+        requirement: t("achievementsData.collector.requirement"),
+        rarity: "rare",
+        unlocked: false,
+        progress: 2,
+        maxProgress: 5
+      },
+      {
+        id: "7",
+        name: t("achievementsData.worldTour.name"),
+        description: t("achievementsData.worldTour.description"),
+        icon: "🌍",
+        requirement: t("achievementsData.worldTour.requirement"),
+        rarity: "epic",
+        unlocked: false,
+        progress: 2,
+        maxProgress: 20
+      },
+      {
+        id: "8",
+        name: t("achievementsData.wealth.name"),
+        description: t("achievementsData.wealth.description"),
+        icon: "💰",
+        requirement: t("achievementsData.wealth.requirement"),
+        rarity: "rare",
+        unlocked: false,
+        progress: 356,
+        maxProgress: 1000
+      },
+      {
+        id: "9",
+        name: t("achievementsData.luckyStar.name"),
+        description: t("achievementsData.luckyStar.description"),
+        icon: "🎰",
+        requirement: t("achievementsData.luckyStar.requirement"),
+        rarity: "epic",
+        unlocked: false,
+        progress: 3,
+        maxProgress: 10
+      },
+      {
+        id: "10",
+        name: t("achievementsData.perfectionist.name"),
+        description: t("achievementsData.perfectionist.description"),
+        icon: "💯",
+        requirement: t("achievementsData.perfectionist.requirement"),
+        rarity: "epic",
+        unlocked: false,
+        progress: 7,
+        maxProgress: 30
+      },
+      {
+        id: "11",
+        name: t("achievementsData.communityStar.name"),
+        description: t("achievementsData.communityStar.description"),
+        icon: "🌟",
+        requirement: t("achievementsData.communityStar.requirement"),
+        rarity: "rare",
+        unlocked: false,
+        progress: 0,
+        maxProgress: 10
+      },
+      {
+        id: "12",
+        name: t("achievementsData.legendaryTraveler.name"),
+        description: t("achievementsData.legendaryTraveler.description"),
+        icon: "🏆",
+        requirement: t("achievementsData.legendaryTraveler.requirement"),
+        rarity: "legendary",
+        unlocked: false,
+        progress: 3,
+        maxProgress: 11
+      }
+    ],
+    [t]
+  );
+
+  const filteredAchievements = achievements.filter((achievement) => {
     if (filter === "unlocked" && !achievement.unlocked) return false;
     if (filter === "locked" && achievement.unlocked) return false;
     if (rarityFilter !== "all" && achievement.rarity !== rarityFilter)
@@ -152,10 +157,10 @@ export default function AchievementsPage() {
   });
 
   const stats = {
-    total: ACHIEVEMENTS.length,
-    unlocked: ACHIEVEMENTS.filter((a) => a.unlocked).length,
+    total: achievements.length,
+    unlocked: achievements.filter((a) => a.unlocked).length,
     progress: Math.round(
-      (ACHIEVEMENTS.filter((a) => a.unlocked).length / ACHIEVEMENTS.length) *
+      (achievements.filter((a) => a.unlocked).length / achievements.length) *
         100
     )
   };
@@ -172,13 +177,13 @@ export default function AchievementsPage() {
                 <h2 className="text-2xl font-bold mb-1">
                   {stats.unlocked} / {stats.total}
                 </h2>
-                <p className="text-sm text-gray-400">已解锁成就</p>
+                <p className="text-sm text-gray-400">{t("achievementsPage.stats.unlocked")}</p>
               </div>
               <div className="text-right">
                 <p className="text-3xl font-bold text-primary">
                   {stats.progress}%
                 </p>
-                <p className="text-sm text-gray-400">完成度</p>
+                <p className="text-sm text-gray-400">{t("achievementsPage.stats.progress")}</p>
               </div>
             </div>
 
@@ -204,7 +209,7 @@ export default function AchievementsPage() {
                       : "text-gray-400 hover:text-white hover:bg-white/10"
                   }`}
                 >
-                  全部 ({ACHIEVEMENTS.length})
+                  {t("achievementsPage.filters.all")} ({achievements.length})
                 </button>
                 <button
                   onClick={() => setFilter("unlocked")}
@@ -214,7 +219,7 @@ export default function AchievementsPage() {
                       : "text-gray-400 hover:text-white hover:bg-white/10"
                   }`}
                 >
-                  已解锁 ({stats.unlocked})
+                  {t("achievementsPage.filters.unlocked")} ({stats.unlocked})
                 </button>
                 <button
                   onClick={() => setFilter("locked")}
@@ -224,13 +229,13 @@ export default function AchievementsPage() {
                       : "text-gray-400 hover:text-white hover:bg-white/10"
                   }`}
                 >
-                  未解锁 ({stats.total - stats.unlocked})
+                  {t("achievementsPage.filters.locked")} ({stats.total - stats.unlocked})
                 </button>
               </div>
 
               {/* 稀有度筛选 */}
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-400">稀有度:</span>
+                <span className="text-sm text-gray-400">{t("achievementsPage.filters.rarity")}</span>
                 <select
                   value={rarityFilter}
                   onChange={(e) =>
@@ -238,11 +243,11 @@ export default function AchievementsPage() {
                   }
                   className="bg-black/30 border border-white/20 rounded-lg px-3 py-1.5 text-sm text-white focus:border-primary focus:outline-none"
                 >
-                  <option value="all">全部</option>
-                  <option value="common">普通</option>
-                  <option value="rare">稀有</option>
-                  <option value="epic">史诗</option>
-                  <option value="legendary">传说</option>
+                  <option value="all">{t("achievementsPage.rarity.all")}</option>
+                  <option value="common">{t("achievementsPage.rarity.common")}</option>
+                  <option value="rare">{t("achievementsPage.rarity.rare")}</option>
+                  <option value="epic">{t("achievementsPage.rarity.epic")}</option>
+                  <option value="legendary">{t("achievementsPage.rarity.legendary")}</option>
                 </select>
               </div>
             </div>
@@ -273,7 +278,7 @@ export default function AchievementsPage() {
               <span className="material-symbols-outlined text-6xl text-white/20 mb-4">
                 search_off
               </span>
-              <p className="text-gray-400">没有找到符合条件的成就</p>
+              <p className="text-gray-400">{t("achievementsPage.empty")}</p>
             </div>
           )}
 
@@ -283,74 +288,82 @@ export default function AchievementsPage() {
               <span className="material-symbols-outlined text-primary">
                 emoji_events
               </span>
-              如何获得成就
+              {t("achievementsPage.howToEarn.title")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <h4 className="text-sm font-bold text-white">每日打卡</h4>
+                <h4 className="text-sm font-bold text-white">
+                  {t("achievementsPage.howToEarn.daily.title")}
+                </h4>
                 <ul className="space-y-1 text-xs text-gray-400">
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>坚持每天完成打卡任务</span>
+                    <span>{t("achievementsPage.howToEarn.daily.item1")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>达成不同天数的里程碑</span>
+                    <span>{t("achievementsPage.howToEarn.daily.item2")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>保持连续打卡记录</span>
+                    <span>{t("achievementsPage.howToEarn.daily.item3")}</span>
                   </li>
                 </ul>
               </div>
               <div className="space-y-2">
-                <h4 className="text-sm font-bold text-white">景点打卡</h4>
+                <h4 className="text-sm font-bold text-white">
+                  {t("achievementsPage.howToEarn.attraction.title")}
+                </h4>
                 <ul className="space-y-1 text-xs text-gray-400">
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>参与景点打卡任务</span>
+                    <span>{t("achievementsPage.howToEarn.attraction.item1")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>探索更多不同的景点</span>
+                    <span>{t("achievementsPage.howToEarn.attraction.item2")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>完成高难度任务</span>
+                    <span>{t("achievementsPage.howToEarn.attraction.item3")}</span>
                   </li>
                 </ul>
               </div>
               <div className="space-y-2">
-                <h4 className="text-sm font-bold text-white">收益累积</h4>
+                <h4 className="text-sm font-bold text-white">
+                  {t("achievementsPage.howToEarn.earnings.title")}
+                </h4>
                 <ul className="space-y-1 text-xs text-gray-400">
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>通过打卡赚取代币</span>
+                    <span>{t("achievementsPage.howToEarn.earnings.item1")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>质押获得利息收益</span>
+                    <span>{t("achievementsPage.howToEarn.earnings.item2")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>参与幸运转盘抽奖</span>
+                    <span>{t("achievementsPage.howToEarn.earnings.item3")}</span>
                   </li>
                 </ul>
               </div>
               <div className="space-y-2">
-                <h4 className="text-sm font-bold text-white">社区互动</h4>
+                <h4 className="text-sm font-bold text-white">
+                  {t("achievementsPage.howToEarn.community.title")}
+                </h4>
                 <ul className="space-y-1 text-xs text-gray-400">
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>邀请好友加入平台</span>
+                    <span>{t("achievementsPage.howToEarn.community.item1")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>分享旅行攻略</span>
+                    <span>{t("achievementsPage.howToEarn.community.item2")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    <span>帮助新用户成长</span>
+                    <span>{t("achievementsPage.howToEarn.community.item3")}</span>
                   </li>
                 </ul>
               </div>

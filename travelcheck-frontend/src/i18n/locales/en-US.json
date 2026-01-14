@@ -12,8 +12,10 @@
     "edit": "Edit",
     "back": "Back",
     "next": "Next",
+    "day": "day",
     "days": "days",
-    "all": "All"
+    "all": "All",
+    "connecting": "Connecting..."
   },
   "nav": {
     "home": "Home",
@@ -103,9 +105,85 @@
     "title": "My Rewards",
     "subtitle": "View your rewards and benefits"
   },
+  "rewardsPage": {
+    "title": "Rewards",
+    "subtitle": "View and claim your earned rewards",
+    "alerts": {
+      "claimed": "Claimed {{amount}} TCK!"
+    },
+    "stats": {
+      "totalEarned": "Total Earned",
+      "unclaimed": "Unclaimed",
+      "lotteryChances": "Lottery Chances",
+      "badgesEarned": "Badges Earned"
+    },
+    "tabs": {
+      "redPackets": "Red Packets",
+      "lottery": "Lottery",
+      "badges": "Badges"
+    },
+    "badges": {
+      "firstCheckin": "First Check-in",
+      "sevenDayStreak": "7-Day Streak",
+      "thirtyDayStreak": "30-Day Streak",
+      "perfectMonth": "Perfect Month",
+      "earned": "Earned",
+      "locked": "Locked"
+    },
+    "recent": {
+      "title": "Recent Rewards",
+      "dailyRedPacket": "Daily Red Packet",
+      "daysAgo": "{{count}} days ago",
+      "claimed": "Claimed"
+    }
+  },
   "attractions": {
     "title": "Attractions",
     "subtitle": "Explore amazing locations"
+  },
+  "attractionsPage": {
+    "title": "Attraction Tasks",
+    "subtitle": "Explore amazing destinations and earn rewards",
+    "alerts": {
+      "joining": "Joining task: {{name}}",
+      "viewing": "Viewing details for: {{name}}"
+    },
+    "filters": {
+      "all": "All Tasks",
+      "active": "Active",
+      "upcoming": "Upcoming",
+      "expiring": "Expiring Soon"
+    },
+    "stats": {
+      "availableTasks": "Available Tasks",
+      "totalRewards": "Total Rewards",
+      "avgApy": "Avg. Reward APY"
+    },
+    "empty": {
+      "title": "No tasks found",
+      "description": "Try selecting a different filter or check back later for new attractions",
+      "cta": "View All Tasks"
+    },
+    "tasks": {
+      "greatWall": {
+        "name": "Great Wall Challenge",
+        "description": "Visit and check in at the magnificent Great Wall of China",
+        "locationName": "Great Wall of China",
+        "locationAddress": "Huairou District, Beijing, China"
+      },
+      "cherryBlossom": {
+        "name": "Cherry Blossom Tour",
+        "description": "Experience the beauty of Japanese cherry blossoms in spring",
+        "locationName": "Shinjuku Gyoen National Garden",
+        "locationAddress": "11 Naitomachi, Shinjuku City, Tokyo 160-0014, Japan"
+      },
+      "alpineAdventure": {
+        "name": "Alpine Adventure",
+        "description": "Explore the stunning Swiss Alps and mountain villages",
+        "locationName": "Matterhorn",
+        "locationAddress": "Zermatt, Valais 3920, Switzerland"
+      }
+    }
   },
   "checkins": {
     "title": "My Check-ins",
@@ -117,6 +195,52 @@
     "viewDetails": "View Details",
     "noActiveStakes": "No active stakes",
     "createFirstStake": "Create your first stake to begin your check-in journey"
+  },
+  "checkinPage": {
+    "title": "Daily Check-In",
+    "subtitle": "Share your travel moment",
+    "formTitle": "Check-In Form",
+    "shareExperienceLabel": "Share Your Experience",
+    "shareExperiencePlaceholder": "Tell us about your day... (minimum {{count}} characters)",
+    "contentMinHint": "{{current}} / {{count}} characters minimum",
+    "locationLabel": "Location",
+    "noLocation": "No location set",
+    "getLocation": "Get Location",
+    "photosLabel": "Photos",
+    "uploadPrompt": "Click to upload photos",
+    "photoRequirement": "At least one photo required",
+    "submit": "Submit Check-In",
+    "submitting": "Submitting...",
+    "alerts": {
+      "success": "Check-in successful!",
+      "locationFailed": "Failed to get location: {{message}}",
+      "geolocationUnsupported": "Geolocation is not supported by this browser"
+    },
+    "tips": {
+      "title": "Check-In Tips",
+      "item1": "Share genuine travel experiences",
+      "item2": "Include clear photos of your location",
+      "item3": "Write at least 200 characters",
+      "item4": "Check in within 24 hours to maintain streak",
+      "item5": "You have 3 makeup chances if you miss a day"
+    }
+  },
+  "calendarPage": {
+    "title": "Check-In Calendar",
+    "subtitle": "Track your check-in history",
+    "checkInToday": "Check In Today",
+    "stats": {
+      "totalCheckins": "Total Check-ins",
+      "currentStreak": "Current Streak",
+      "makeupChances": "Makeup Chances",
+      "completion": "Completion"
+    },
+    "recent": {
+      "title": "Recent Check-Ins",
+      "checkinDay": "Check-in Day {{index}}",
+      "daysAgo": "{{count}} days ago",
+      "sampleContent": "Amazing day exploring the city center. Visited the historic district and enjoyed local cuisine..."
+    }
   },
   "achievements": {
     "title": "My Achievements",
@@ -153,7 +277,235 @@
     "memberSince": "Member Since",
     "editProfile": "Edit Profile",
     "changeAvatar": "Change Avatar",
-    "walletAddress": "Wallet Address"
+    "walletAddress": "Wallet Address",
+    "attractionsVisited": "Attractions Visited",
+    "connectWalletPrompt": "Please connect your wallet first",
+    "connectWallet": "Connect Wallet",
+    "nicknamePlaceholder": "Enter nickname",
+    "anonymous": "Anonymous",
+    "saving": "Saving...",
+    "achievementsWall": "Achievements Wall",
+    "alerts": {
+      "nicknameRequired": "Nickname cannot be empty",
+      "updateSuccess": "Profile updated successfully!",
+      "updateFailed": "Update failed, please try again",
+      "avatarPrompt": "Enter new avatar URL:",
+      "avatarUpdateSuccess": "Avatar updated successfully!",
+      "avatarUpdateFailed": "Avatar update failed, please try again"
+    }
+  },
+  "taskCard": {
+    "status": {
+      "upcoming": "Upcoming",
+      "active": "Active",
+      "expiring": "Expiring Soon",
+      "completed": "Completed"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "daysLeft": "{{count}} {{unit}} left",
+    "duration": "Duration",
+    "rewardApy": "Reward APY",
+    "minStake": "Min Stake",
+    "difficultyLabel": "Difficulty",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "joinTask": "Join Task",
+    "viewDetails": "View Details"
+  },
+  "stakeCard": {
+    "status": {
+      "active": "Active",
+      "completed": "Completed",
+      "withdrawn": "Withdrawn"
+    },
+    "type": {
+      "daily": "Daily Task",
+      "attraction": "Attraction Task"
+    },
+    "mode": {
+      "sealed": "Sealed",
+      "anytime": "Anytime"
+    },
+    "milestone": "{{count}} Days Milestone",
+    "perfect": "Perfect",
+    "progress": "Progress",
+    "progressValue": "{{current}} / {{total}} {{unit}}",
+    "accumulatedInterest": "Accumulated Interest",
+    "totalReturn": "Total Return",
+    "startDate": "Start Date",
+    "expectedEnd": "Expected End",
+    "checkInToday": "Check In Today",
+    "withdraw": "Withdraw",
+    "viewDetails": "View Details"
+  },
+  "walletConnect": {
+    "walletLabel": "Wallet",
+    "copied": "Copied!",
+    "copyAddress": "Copy Address"
+  },
+  "redPacket": {
+    "title": "Red Packet",
+    "tapToOpen": "Tap to Open",
+    "expiresIn": "Expires in: {{time}}",
+    "timeRemaining": "{{hours}}h {{minutes}}m {{seconds}}s",
+    "congrats": "Congratulations!",
+    "claimNow": "Claim Now",
+    "alreadyClaimed": "Already Claimed",
+    "status": {
+      "claimed": "Claimed",
+      "expired": "Expired",
+      "unclaimed": "Unclaimed"
+    }
+  },
+  "lotteryWheel": {
+    "ariaLabel": "Lottery wheel",
+    "chancesRemaining": "Chances Remaining",
+    "spinning": "Spinning...",
+    "spinNow": "Spin Now!",
+    "congrats": "Congratulations!",
+    "youWon": "You won:",
+    "claimPrize": "Claim Prize"
+  },
+  "calendarGrid": {
+    "weekdays": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "legend": {
+      "checked": "Checked",
+      "missed": "Missed",
+      "makeup": "Makeup",
+      "attraction": "Attraction",
+      "canMakeup": "Can Makeup"
+    }
+  },
+  "achievementsData": {
+    "travelSeed": {
+      "name": "Travel Seed",
+      "description": "Complete your first daily check-in",
+      "requirement": "Complete 1 daily check-in"
+    },
+    "sevenDays": {
+      "name": "Seven-Day Streak",
+      "description": "Check in for 7 consecutive days",
+      "requirement": "Check in for 7 consecutive days"
+    },
+    "thirtyDays": {
+      "name": "Traveler Pro",
+      "description": "Complete the 30-day milestone",
+      "requirement": "Complete the 30-day milestone"
+    },
+    "explorer": {
+      "name": "Explorer",
+      "description": "Complete the 100-day milestone",
+      "requirement": "Complete the 100-day milestone"
+    },
+    "master": {
+      "name": "Travel Master",
+      "description": "Complete the 365-day milestone",
+      "requirement": "Complete the 365-day milestone"
+    },
+    "collector": {
+      "name": "Attraction Collector",
+      "description": "Check in at 5 different attractions",
+      "requirement": "Check in at 5 different attractions"
+    },
+    "worldTour": {
+      "name": "Around the World",
+      "description": "Check in at 20 different attractions",
+      "requirement": "Check in at 20 different attractions"
+    },
+    "wealth": {
+      "name": "Wealth Builder",
+      "description": "Accumulate 1000 tokens in earnings",
+      "requirement": "Reach 1000 tokens in earnings"
+    },
+    "luckyStar": {
+      "name": "Lucky Star",
+      "description": "Win 10 grand prizes in the lottery",
+      "requirement": "Win 10 grand prizes in the lottery"
+    },
+    "perfectionist": {
+      "name": "Perfectionist",
+      "description": "30 days without missing a check-in",
+      "requirement": "30 days without missing a check-in"
+    },
+    "communityStar": {
+      "name": "Community Star",
+      "description": "Invite 10 friends to join",
+      "requirement": "Invite 10 friends to join"
+    },
+    "legendaryTraveler": {
+      "name": "Legendary Traveler",
+      "description": "Earn all other badges",
+      "requirement": "Earn all other badges"
+    }
+  },
+  "achievementsPage": {
+    "stats": {
+      "unlocked": "Achievements Unlocked",
+      "progress": "Completion"
+    },
+    "filters": {
+      "all": "All",
+      "unlocked": "Unlocked",
+      "locked": "Locked",
+      "rarity": "Rarity:"
+    },
+    "rarity": {
+      "all": "All",
+      "common": "Common",
+      "rare": "Rare",
+      "epic": "Epic",
+      "legendary": "Legendary"
+    },
+    "empty": "No achievements match your filters",
+    "howToEarn": {
+      "title": "How to Earn Achievements",
+      "daily": {
+        "title": "Daily Check-ins",
+        "item1": "Complete your check-in every day",
+        "item2": "Reach different day milestones",
+        "item3": "Maintain a continuous streak"
+      },
+      "attraction": {
+        "title": "Attraction Check-ins",
+        "item1": "Join attraction check-in tasks",
+        "item2": "Explore more unique attractions",
+        "item3": "Complete higher difficulty tasks"
+      },
+      "earnings": {
+        "title": "Earnings",
+        "item1": "Earn tokens through check-ins",
+        "item2": "Stake to receive interest",
+        "item3": "Spin the lucky wheel"
+      },
+      "community": {
+        "title": "Community",
+        "item1": "Invite friends to join the platform",
+        "item2": "Share travel guides",
+        "item3": "Help new users grow"
+      }
+    }
+  },
+  "achievementBadge": {
+    "rarity": {
+      "common": "Common",
+      "rare": "Rare",
+      "epic": "Epic",
+      "legendary": "Legendary"
+    },
+    "unlocked": "Unlocked",
+    "unlockedAt": "Unlocked on {{date}}"
   },
   "footer": {
     "copyright": "© 2024 TravelCheck. All rights reserved.",

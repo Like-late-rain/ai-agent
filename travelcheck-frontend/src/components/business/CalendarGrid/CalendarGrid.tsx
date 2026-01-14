@@ -7,6 +7,7 @@ import { Button } from '@/components/common/Button'
 import type { CheckinStatus } from '@/types/components.types'
 import { clsx } from 'clsx'
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * Day cell data
@@ -68,13 +69,22 @@ export function CalendarGrid({
   onDayClick,
   onMonthChange,
 }: CalendarGridProps) {
+  const { t, i18n } = useTranslation()
   const [currentYear, setCurrentYear] = useState(year)
   const [currentMonth, setCurrentMonth] = useState(month)
 
   /**
    * Week day labels
    */
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  const weekDays = [
+    t('calendarGrid.weekdays.sun'),
+    t('calendarGrid.weekdays.mon'),
+    t('calendarGrid.weekdays.tue'),
+    t('calendarGrid.weekdays.wed'),
+    t('calendarGrid.weekdays.thu'),
+    t('calendarGrid.weekdays.fri'),
+    t('calendarGrid.weekdays.sat'),
+  ]
 
   /**
    * Generate calendar days
@@ -293,7 +303,7 @@ export function CalendarGrid({
         </Button>
 
         <h3 className="text-lg font-semibold text-white">
-          {new Date(currentYear, currentMonth - 1).toLocaleDateString('en-US', {
+          {new Date(currentYear, currentMonth - 1).toLocaleDateString(i18n.language, {
             year: 'numeric',
             month: 'long',
           })}
@@ -351,23 +361,23 @@ export function CalendarGrid({
       <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded bg-primary/20 border border-primary" />
-          <span className="text-text-muted">Checked</span>
+          <span className="text-text-muted">{t('calendarGrid.legend.checked')}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded bg-red-500/20 border border-red-500/50" />
-          <span className="text-text-muted">Missed</span>
+          <span className="text-text-muted">{t('calendarGrid.legend.missed')}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded bg-yellow-500/20 border border-yellow-500/50" />
-          <span className="text-text-muted">Makeup</span>
+          <span className="text-text-muted">{t('calendarGrid.legend.makeup')}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded bg-blue-500/20 border border-blue-500/50" />
-          <span className="text-text-muted">Attraction</span>
+          <span className="text-text-muted">{t('calendarGrid.legend.attraction')}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded bg-orange-500/20 border border-orange-500/50 ring-2 ring-orange-500" />
-          <span className="text-text-muted">Can Makeup</span>
+          <span className="text-text-muted">{t('calendarGrid.legend.canMakeup')}</span>
         </div>
       </div>
     </div>

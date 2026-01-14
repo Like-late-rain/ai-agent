@@ -8,22 +8,24 @@ import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
 import type { AttractionTask } from '@/types/models.types'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * AttractionsPage Component
  */
 export function AttractionsPage() {
+  const { t } = useTranslation()
   const [filter, setFilter] = useState<'all' | 'active' | 'upcoming' | 'expiring'>('all')
 
   // Mock attraction tasks
   const tasks: AttractionTask[] = [
     {
       id: '1',
-      name: 'Great Wall Challenge',
-      description: 'Visit and check in at the magnificent Great Wall of China',
+      name: t('attractionsPage.tasks.greatWall.name'),
+      description: t('attractionsPage.tasks.greatWall.description'),
       location: {
-        name: 'Great Wall of China',
-        address: 'Huairou District, Beijing, China',
+        name: t('attractionsPage.tasks.greatWall.locationName'),
+        address: t('attractionsPage.tasks.greatWall.locationAddress'),
         lat: 40.4319,
         lng: 116.5704,
         radius: 500,
@@ -41,11 +43,11 @@ export function AttractionsPage() {
     },
     {
       id: '2',
-      name: 'Cherry Blossom Tour',
-      description: 'Experience the beauty of Japanese cherry blossoms in spring',
+      name: t('attractionsPage.tasks.cherryBlossom.name'),
+      description: t('attractionsPage.tasks.cherryBlossom.description'),
       location: {
-        name: 'Shinjuku Gyoen National Garden',
-        address: '11 Naitomachi, Shinjuku City, Tokyo 160-0014, Japan',
+        name: t('attractionsPage.tasks.cherryBlossom.locationName'),
+        address: t('attractionsPage.tasks.cherryBlossom.locationAddress'),
         lat: 35.6852,
         lng: 139.7103,
         radius: 300,
@@ -63,11 +65,11 @@ export function AttractionsPage() {
     },
     {
       id: '3',
-      name: 'Alpine Adventure',
-      description: 'Explore the stunning Swiss Alps and mountain villages',
+      name: t('attractionsPage.tasks.alpineAdventure.name'),
+      description: t('attractionsPage.tasks.alpineAdventure.description'),
       location: {
-        name: 'Matterhorn',
-        address: 'Zermatt, Valais 3920, Switzerland',
+        name: t('attractionsPage.tasks.alpineAdventure.locationName'),
+        address: t('attractionsPage.tasks.alpineAdventure.locationAddress'),
         lat: 45.9763,
         lng: 7.6586,
         radius: 1000,
@@ -91,18 +93,18 @@ export function AttractionsPage() {
   })
 
   const handleJoinTask = (task: AttractionTask) => {
-    alert(`Joining task: ${task.name}`)
+    alert(t('attractionsPage.alerts.joining', { name: task.name }))
   }
 
   const handleViewDetails = (task: AttractionTask) => {
-    alert(`Viewing details for: ${task.name}`)
+    alert(t('attractionsPage.alerts.viewing', { name: task.name }))
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2">Attraction Tasks</h1>
-        <p className="text-text-muted">Explore amazing destinations and earn rewards</p>
+        <h1 className="text-3xl font-bold text-white mb-2">{t('attractionsPage.title')}</h1>
+        <p className="text-text-muted">{t('attractionsPage.subtitle')}</p>
       </div>
 
       {/* Filter Tabs */}
@@ -110,10 +112,10 @@ export function AttractionsPage() {
         <Card.Body>
           <div className="flex gap-2 overflow-x-auto">
             {[
-              { value: 'all', label: 'All Tasks', icon: '🗺️' },
-              { value: 'active', label: 'Active', icon: '🔥' },
-              { value: 'upcoming', label: 'Upcoming', icon: '📅' },
-              { value: 'expiring', label: 'Expiring Soon', icon: '⏰' },
+              { value: 'all', label: t('attractionsPage.filters.all'), icon: '🗺️' },
+              { value: 'active', label: t('attractionsPage.filters.active'), icon: '🔥' },
+              { value: 'upcoming', label: t('attractionsPage.filters.upcoming'), icon: '📅' },
+              { value: 'expiring', label: t('attractionsPage.filters.expiring'), icon: '⏰' },
             ].map((tab) => (
               <button
                 key={tab.value}
@@ -137,13 +139,17 @@ export function AttractionsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <Card.Body>
-            <p className="text-sm text-text-muted mb-1">Available Tasks</p>
+            <p className="text-sm text-text-muted mb-1">
+              {t('attractionsPage.stats.availableTasks')}
+            </p>
             <p className="text-2xl font-bold text-white">{tasks.length}</p>
           </Card.Body>
         </Card>
         <Card>
           <Card.Body>
-            <p className="text-sm text-text-muted mb-1">Total Rewards</p>
+            <p className="text-sm text-text-muted mb-1">
+              {t('attractionsPage.stats.totalRewards')}
+            </p>
             <p className="text-2xl font-bold text-primary">
               {tasks.reduce((sum, task) => sum + task.minStake, 0)} TCK
             </p>
@@ -151,7 +157,7 @@ export function AttractionsPage() {
         </Card>
         <Card>
           <Card.Body>
-            <p className="text-sm text-text-muted mb-1">Avg. Reward APY</p>
+            <p className="text-sm text-text-muted mb-1">{t('attractionsPage.stats.avgApy')}</p>
             <p className="text-2xl font-bold text-white">
               {(tasks.reduce((sum, task) => sum + task.rewardApy, 0) / tasks.length).toFixed(1)}%
             </p>
@@ -176,12 +182,14 @@ export function AttractionsPage() {
           <Card.Body>
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🗺️</div>
-              <h3 className="text-xl font-semibold text-white mb-2">No tasks found</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                {t('attractionsPage.empty.title')}
+              </h3>
               <p className="text-text-muted mb-6">
-                Try selecting a different filter or check back later for new attractions
+                {t('attractionsPage.empty.description')}
               </p>
               <Button variant="primary" onClick={() => setFilter('all')}>
-                View All Tasks
+                {t('attractionsPage.empty.cta')}
               </Button>
             </div>
           </Card.Body>

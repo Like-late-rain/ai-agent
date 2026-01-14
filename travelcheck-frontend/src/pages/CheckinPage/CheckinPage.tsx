@@ -7,12 +7,14 @@ import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
 import { Input } from '@/components/common/Input'
 import { type FormEvent, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
 /**
  * CheckinPage Component
  */
 export function CheckinPage() {
+  const { t } = useTranslation()
   const { stakeId } = useParams<{ stakeId: string }>()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -29,7 +31,7 @@ export function CheckinPage() {
     // Simulate API call
     setTimeout(() => {
       setLoading(false)
-      alert('Check-in successful!')
+      alert(t('checkinPage.alerts.success'))
       navigate('/')
     }, 1500)
   }
@@ -47,36 +49,36 @@ export function CheckinPage() {
           })
         },
         (error) => {
-          alert(`Failed to get location: ${error.message}`)
+          alert(t('checkinPage.alerts.locationFailed', { message: error.message }))
         }
       )
     } else {
-      alert('Geolocation is not supported by this browser')
+      alert(t('checkinPage.alerts.geolocationUnsupported'))
     }
   }
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2">Daily Check-In</h1>
-        <p className="text-text-muted">Share your travel moment</p>
+        <h1 className="text-3xl font-bold text-white mb-2">{t('checkinPage.title')}</h1>
+        <p className="text-text-muted">{t('checkinPage.subtitle')}</p>
       </div>
 
       <Card>
         <Card.Header>
-          <h2 className="text-xl font-semibold text-white">Check-In Form</h2>
+          <h2 className="text-xl font-semibold text-white">{t('checkinPage.formTitle')}</h2>
         </Card.Header>
         <Card.Body>
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Content Input */}
             <div>
               <label htmlFor="content" className="block text-sm font-medium text-white mb-2">
-                Share Your Experience *
+                {t('checkinPage.shareExperienceLabel')} *
               </label>
               <textarea
                 id="content"
                 className="w-full px-4 py-3 bg-background-dark border-2 border-border-dark rounded-lg text-white placeholder-text-muted focus:border-primary focus:outline-none"
-                placeholder="Tell us about your day... (minimum 200 characters)"
+                placeholder={t('checkinPage.shareExperiencePlaceholder', { count: 200 })}
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                 rows={6}
@@ -84,14 +86,17 @@ export function CheckinPage() {
                 required
               />
               <p className="text-xs text-text-muted mt-1">
-                {formData.content.length} / 200 characters minimum
+                {t('checkinPage.contentMinHint', {
+                  current: formData.content.length,
+                  count: 200,
+                })}
               </p>
             </div>
 
             {/* Location */}
             <div>
               <label htmlFor="location-input" className="block text-sm font-medium text-white mb-2">
-                Location
+                {t('checkinPage.locationLabel')}
               </label>
               <div className="flex gap-2">
                 <Input
@@ -100,24 +105,26 @@ export function CheckinPage() {
                   value={
                     formData.location.lat && formData.location.lng
                       ? `${formData.location.lat.toFixed(6)}, ${formData.location.lng.toFixed(6)}`
-                      : 'No location set'
+                      : t('checkinPage.noLocation')
                   }
                   readOnly
                   className="flex-1"
                 />
                 <Button type="button" variant="outline" onClick={handleGetLocation}>
-                  Get Location
+                  {t('checkinPage.getLocation')}
                 </Button>
               </div>
             </div>
 
             {/* Image Upload Placeholder */}
             <div>
-              <div className="block text-sm font-medium text-white mb-2">Photos *</div>
+              <div className="block text-sm font-medium text-white mb-2">
+                {t('checkinPage.photosLabel')} *
+              </div>
               <div className="border-2 border-dashed border-border-dark rounded-lg p-8 text-center">
                 <div className="text-4xl mb-2">📷</div>
-                <p className="text-text-muted text-sm">Click to upload photos</p>
-                <p className="text-text-muted text-xs mt-1">At least one photo required</p>
+                <p className="text-text-muted text-sm">{t('checkinPage.uploadPrompt')}</p>
+                <p className="text-text-muted text-xs mt-1">{t('checkinPage.photoRequirement')}</p>
               </div>
             </div>
 
@@ -129,7 +136,7 @@ export function CheckinPage() {
                 fullWidth
                 onClick={() => navigate(`/calendar/${stakeId}`)}
               >
-                Cancel
+                {t('common.cancel')}
               </Button>
               <Button
                 type="submit"
@@ -138,7 +145,7 @@ export function CheckinPage() {
                 loading={loading}
                 disabled={loading || formData.content.length < 200}
               >
-                {loading ? 'Submitting...' : 'Submit Check-In'}
+                {loading ? t('checkinPage.submitting') : t('checkinPage.submit')}
               </Button>
             </div>
           </form>
@@ -148,15 +155,15 @@ export function CheckinPage() {
       {/* Tips Card */}
       <Card>
         <Card.Header>
-          <h2 className="text-xl font-semibold text-white">Check-In Tips</h2>
+          <h2 className="text-xl font-semibold text-white">{t('checkinPage.tips.title')}</h2>
         </Card.Header>
         <Card.Body>
           <div className="space-y-2 text-sm text-text-muted">
-            <p>✓ Share genuine travel experiences</p>
-            <p>✓ Include clear photos of your location</p>
-            <p>✓ Write at least 200 characters</p>
-            <p>✓ Check in within 24 hours to maintain streak</p>
-            <p>✓ You have 3 makeup chances if you miss a day</p>
+            <p>✓ {t('checkinPage.tips.item1')}</p>
+            <p>✓ {t('checkinPage.tips.item2')}</p>
+            <p>✓ {t('checkinPage.tips.item3')}</p>
+            <p>✓ {t('checkinPage.tips.item4')}</p>
+            <p>✓ {t('checkinPage.tips.item5')}</p>
           </div>
         </Card.Body>
       </Card>

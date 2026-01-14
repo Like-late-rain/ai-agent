@@ -8,6 +8,7 @@ import type { Reward } from '@/types/models.types'
 import { formatAmount } from '@/utils/format'
 import { clsx } from 'clsx'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * RedPacket component props
@@ -33,6 +34,7 @@ export interface RedPacketProps {
  * />
  */
 export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProps) {
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [timeRemaining, setTimeRemaining] = useState<string>('')
 
@@ -56,7 +58,7 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
       const diff = expireDate.getTime() - now.getTime()
 
       if (diff <= 0) {
-        setTimeRemaining('Expired')
+        setTimeRemaining(t('redPacket.status.expired'))
         return
       }
 
@@ -64,7 +66,7 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
       const seconds = Math.floor((diff % (1000 * 60)) / 1000)
 
-      setTimeRemaining(`${hours}h ${minutes}m ${seconds}s`)
+      setTimeRemaining(t('redPacket.timeRemaining', { hours, minutes, seconds }))
     }
 
     updateTimeRemaining()
@@ -93,10 +95,10 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
    * Get status text
    */
   const statusText = useMemo(() => {
-    if (reward.claimed) return 'Claimed'
-    if (isExpired) return 'Expired'
-    return 'Unclaimed'
-  }, [reward.claimed, isExpired])
+    if (reward.claimed) return t('redPacket.status.claimed')
+    if (isExpired) return t('redPacket.status.expired')
+    return t('redPacket.status.unclaimed')
+  }, [reward.claimed, isExpired, t])
 
   return (
     <div
@@ -140,7 +142,7 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
               />
             </svg>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-2">Red Packet</h3>
+          <h3 className="text-2xl font-bold text-white mb-2">{t('redPacket.title')}</h3>
           <p className="text-yellow-200 text-sm">{statusText}</p>
         </div>
 
@@ -148,9 +150,11 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
         {!isOpen ? (
           <div className="text-center">
             <div className="mb-4">
-              <div className="text-yellow-200 text-sm mb-2">Tap to Open</div>
+              <div className="text-yellow-200 text-sm mb-2">{t('redPacket.tapToOpen')}</div>
               {!reward.claimed && !isExpired && (
-                <div className="text-white text-xs">Expires in: {timeRemaining}</div>
+                <div className="text-white text-xs">
+                  {t('redPacket.expiresIn', { time: timeRemaining })}
+                </div>
               )}
             </div>
 
@@ -174,7 +178,7 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
         ) : (
           <div className="text-center animate-fadeIn">
             <div className="mb-6">
-              <div className="text-yellow-200 text-sm mb-2">Congratulations!</div>
+              <div className="text-yellow-200 text-sm mb-2">{t('redPacket.congrats')}</div>
               <div className="text-5xl font-bold text-white">
                 {formatAmount(reward.amount || 0)}
               </div>
@@ -189,12 +193,14 @@ export function RedPacket({ reward, className, onClaim, onClose }: RedPacketProp
                 onClick={handleClaim}
                 className="bg-yellow-400 hover:bg-yellow-300 text-red-600 font-bold"
               >
-                Claim Now
+                {t('redPacket.claimNow')}
               </Button>
             )}
 
             {reward.claimed && (
-              <div className="text-green-400 text-sm font-medium">✓ Already Claimed</div>
+              <div className="text-green-400 text-sm font-medium">
+                ✓ {t('redPacket.alreadyClaimed')}
+              </div>
             )}
           </div>
         )}

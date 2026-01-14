@@ -8,6 +8,7 @@ import { LOTTERY_PRIZES } from '@/constants/business'
 import type { LotteryPrize as LotteryPrizeModel } from '@/types/models.types'
 import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * LotteryWheel component props
@@ -48,6 +49,7 @@ const PRIZE_COLORS = [
  * />
  */
 export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWheelProps) {
+  const { t } = useTranslation()
   const [isSpinning, setIsSpinning] = useState(false)
   const [rotation, setRotation] = useState(0)
   const [result, setResult] = useState<LotteryPrizeModel | null>(null)
@@ -126,7 +128,7 @@ export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWh
             }}
             viewBox="0 0 100 100"
             role="img"
-            aria-label="Lottery wheel"
+            aria-label={t('lotteryWheel.ariaLabel')}
           >
             {/* Draw prize slices */}
             {LOTTERY_PRIZES.map((prize, index) => {
@@ -193,7 +195,7 @@ export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWh
 
       {/* Chances remaining */}
       <div className="text-center">
-        <p className="text-sm text-text-muted mb-1">Chances Remaining</p>
+        <p className="text-sm text-text-muted mb-1">{t('lotteryWheel.chancesRemaining')}</p>
         <p className="text-3xl font-bold text-primary">{chances}</p>
       </div>
 
@@ -206,7 +208,7 @@ export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWh
         loading={isSpinning}
         className="min-w-32"
       >
-        {isSpinning ? 'Spinning...' : 'Spin Now!'}
+        {isSpinning ? t('lotteryWheel.spinning') : t('lotteryWheel.spinNow')}
       </Button>
 
       {/* Result modal */}
@@ -233,8 +235,8 @@ export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWh
             {/* Result content */}
             <div className="relative z-10">
               <div className="text-6xl mb-4">🎉</div>
-              <h2 className="text-2xl font-bold text-white mb-2">Congratulations!</h2>
-              <p className="text-text-muted mb-4">You won:</p>
+              <h2 className="text-2xl font-bold text-white mb-2">{t('lotteryWheel.congrats')}</h2>
+              <p className="text-text-muted mb-4">{t('lotteryWheel.youWon')}</p>
               <div className="bg-background-dark rounded-lg p-4 mb-6">
                 <p className="text-3xl font-bold text-primary mb-2">{result.name}</p>
                 {result.type === 'token' && result.amount && (
@@ -242,7 +244,7 @@ export function LotteryWheel({ chances, className, onSpin, onResult }: LotteryWh
                 )}
               </div>
               <Button variant="primary" size="lg" onClick={() => setResult(null)}>
-                Claim Prize
+                {t('lotteryWheel.claimPrize')}
               </Button>
             </div>
           </div>

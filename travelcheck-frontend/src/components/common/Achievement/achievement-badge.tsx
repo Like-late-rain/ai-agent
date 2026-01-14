@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from 'react-i18next'
+
 export interface Achievement {
   id: string;
   name: string;
@@ -24,6 +26,7 @@ export default function AchievementBadge({
   size = 'medium',
   showProgress = true,
 }: AchievementBadgeProps) {
+  const { t } = useTranslation()
   const getRarityColor = (rarity: Achievement['rarity']) => {
     switch (rarity) {
       case 'common':
@@ -60,13 +63,13 @@ export default function AchievementBadge({
   const getRarityLabel = (rarity: Achievement['rarity']) => {
     switch (rarity) {
       case 'common':
-        return '普通';
+        return t('achievementBadge.rarity.common');
       case 'rare':
-        return '稀有';
+        return t('achievementBadge.rarity.rare');
       case 'epic':
-        return '史诗';
+        return t('achievementBadge.rarity.epic');
       case 'legendary':
-        return '传说';
+        return t('achievementBadge.rarity.legendary');
     }
   };
 
@@ -104,8 +107,8 @@ export default function AchievementBadge({
     ? `${achievement.progress}/${achievement.maxProgress || 100}`
     : achievement.unlocked
       ? achievement.unlockedAt && size === 'large'
-        ? `解锁于 ${achievement.unlockedAt}`
-        : '已解锁'
+        ? t('achievementBadge.unlockedAt', { date: achievement.unlockedAt })
+        : t('achievementBadge.unlocked')
       : '';
 
   return (

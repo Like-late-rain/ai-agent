@@ -6,10 +6,11 @@
 import Achievement from "@/components/common/Achievement";
 import { Button } from "@/components/common/Button";
 import { Card } from "@/components/common/Card";
-import { useWallet } from "@/hooks/useWallet";
-import type { User } from "@/types/models.types";
+import { updateUserProfile } from "@/services/auth.service";
+import { updateUserAtom, userAtom } from "@/store/user.atom";
 import { formatAmount } from "@/utils/format";
-import { useState } from "react";
+import { useAtom, useSetAtom } from "jotai";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 /**
@@ -17,21 +18,24 @@ import { useTranslation } from "react-i18next";
  */
 export function ProfilePage() {
   const { t } = useTranslation();
-  const { address } = useWallet();
+  //   const { address } = useWallet();
 
-  // Mock user data
-  const [user] = useState<User>({
-    id: "user1",
-    walletAddress: address || "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
-    nickname: "Travel Enthusiast",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=TravelCheck",
-    totalCheckins: 127,
-    currentStreak: 15,
-    maxStreak: 45,
-    lotteryChances: 3,
-    badges: ["early-bird", "perfect-month", "world-explorer"],
-    createdAt: new Date("2023-11-01")
-  });
+  //   // Mock user data
+  //   const [user] = useState<User>({
+  //     id: "user1",
+  //     walletAddress: address || "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+  //     nickname: "Travel Enthusiast",
+  //     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=TravelCheck",
+  //     totalCheckins: 127,
+  //     currentStreak: 15,
+  //     maxStreak: 45,
+  //     lotteryChances: 3,
+  //     badges: ["early-bird", "perfect-month", "world-explorer"],
+  //     createdAt: new Date("2023-11-01")
+  //   });
+
+  const [user] = useAtom(userAtom);
+  const updateUser = useSetAtom(updateUserAtom);
 
   const [stats] = useState({
     totalStaked: 1500,
@@ -42,12 +46,69 @@ export function ProfilePage() {
     attractionsVisited: 12
   });
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [nickname, setNickname] = useState(user?.nickname || "");
+  const [avatar, setAvatar] = useState(user?.avatar || "");
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  // 同步用户数据到本地状态
+  useEffect(() => {
+    if (user) {
+      setNickname(user.nickname || "");
+      setAvatar(user.avatar || "");
+    }
+  }, [user]);
+
   const handleEditProfile = () => {
-    alert(t("profile.editProfile"));
+    setIsEditing(true);
   };
 
-  const handleChangeAvatar = () => {
-    alert(t("profile.changeAvatar"));
+  const handleSaveProfile = async () => {
+    if (!nickname.trim()) {
+      alert(t("profile.alerts.nicknameRequired"));
+      return;
+    }
+
+    setIsUpdating(true);
+    try {
+      // 调用后端API更新用户资料
+      await updateUserProfile({ nickname, avatar });
+
+      // 更新本地状态
+      updateUser({ nickname, avatar });
+      setIsEditing(false);
+      alert(t("profile.alerts.updateSuccess"));
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+      alert(t("profile.alerts.updateFailed"));
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setNickname(user?.nickname || "");
+    setAvatar(user?.avatar || "");
+    setIsEditing(false);
+  };
+
+  const handleChangeAvatar = async () => {
+    const newAvatar = prompt(t("profile.alerts.avatarPrompt"));
+    if (newAvatar && newAvatar.trim()) {
+      setIsUpdating(true);
+      try {
+        // 直接调用API更新头像
+        await updateUserProfile({ avatar: newAvatar.trim() });
+        updateUser({ avatar: newAvatar.trim() });
+        setAvatar(newAvatar.trim());
+        alert(t("profile.alerts.avatarUpdateSuccess"));
+      } catch (error) {
+        console.error("Failed to update avatar:", error);
+        alert(t("profile.alerts.avatarUpdateFailed"));
+      } finally {
+        setIsUpdating(false);
+      }
+    }
   };
 
   const formatWalletAddress = (address: string) => {
@@ -56,6 +117,7 @@ export function ProfilePage() {
   };
 
   const getDaysAsMember = () => {
+    if (!user) return 0;
     const now = new Date();
     const created = new Date(user.createdAt);
     const days = Math.floor(
@@ -63,6 +125,19 @@ export function ProfilePage() {
     );
     return days;
   };
+
+  if (!user) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <p className="text-xl text-text-muted mb-4">{t("profile.connectWalletPrompt")}</p>
+          <Button onClick={() => (window.location.href = "/")}>
+            {t("profile.connectWallet")}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -91,7 +166,8 @@ export function ProfilePage() {
                 />
                 <button
                   onClick={handleChangeAvatar}
-                  className="absolute bottom-0 right-0 bg-primary hover:bg-primary/80 text-background-dark rounded-full p-2 transition-colors"
+                  disabled={isUpdating}
+                  className="absolute bottom-0 right-0 bg-primary hover:bg-primary/80 text-background-dark rounded-full p-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   type="button"
                   aria-label={t("profile.changeAvatar")}
                 >
@@ -120,9 +196,21 @@ export function ProfilePage() {
 
             {/* User Info */}
             <div className="flex-1 text-center md:text-left">
-              <h2 className="text-2xl font-bold text-white mb-2">
-                {user.nickname || "Anonymous"}
-              </h2>
+              {isEditing ? (
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    className="text-2xl font-bold bg-background-card text-white border border-primary rounded px-3 py-1"
+                    placeholder={t("profile.nicknamePlaceholder")}
+                  />
+                </div>
+              ) : (
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  {user.nickname || t("profile.anonymous")}
+                </h2>
+              )}
               <div className="space-y-2">
                 <div className="flex items-center justify-center md:justify-start gap-2 text-text-muted">
                   <svg
@@ -149,14 +237,33 @@ export function ProfilePage() {
                     />
                   </svg>
                   <span className="text-sm">
-                    {t("profile.memberSince")}: {getDaysAsMember()} days
+                    {t("profile.memberSince")}: {getDaysAsMember()} {t("common.days")}
                   </span>
                 </div>
               </div>
-              <div className="mt-4">
-                <Button variant="outline" onClick={handleEditProfile}>
-                  {t("profile.editProfile")}
-                </Button>
+              <div className="mt-4 space-x-2">
+                {isEditing ? (
+                  <>
+                    <Button onClick={handleSaveProfile} disabled={isUpdating}>
+                      {isUpdating ? t("profile.saving") : t("common.save")}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={handleCancelEdit}
+                      disabled={isUpdating}
+                    >
+                      {t("common.cancel")}
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    variant="outline"
+                    onClick={handleEditProfile}
+                    disabled={isUpdating}
+                  >
+                    {t("profile.editProfile")}
+                  </Button>
+                )}
               </div>
             </div>
 
@@ -300,7 +407,7 @@ export function ProfilePage() {
       {/* Activity Summary */}
       <Card>
         <Card.Header>
-          <h2 className="text-xl font-semibold text-white">成就墙</h2>
+          <h2 className="text-xl font-semibold text-white">{t("profile.achievementsWall")}</h2>
         </Card.Header>
         <Card.Body>
           <Achievement />
